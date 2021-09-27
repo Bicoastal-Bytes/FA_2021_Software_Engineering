@@ -1,14 +1,14 @@
 [tool.poetry]
 name = "wheel-of-jeopardy"
 version = "0.1.0"
-description = "A project created for the Johns Hopkins Foundations of Software Engineering Course Fall 2021"
+description = "A project created for the Johns Hopkins Foundations of Software Engineering course, Fall 2021"
 authors = ["Clayton Franklin <cfrank31@jh.edu>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+Django = "^3.2.7"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
