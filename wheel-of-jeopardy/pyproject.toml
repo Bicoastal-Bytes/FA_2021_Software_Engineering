@@ -7,6 +7,7 @@ authors = ["Clayton Franklin <cfrank31@jh.edu>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 Django = "^3.2.7"
+channels = "^3.0.4"
 
 [tool.poetry.dev-dependencies]
 
