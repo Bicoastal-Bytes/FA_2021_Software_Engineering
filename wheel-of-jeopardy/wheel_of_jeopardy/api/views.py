@@ -41,9 +41,10 @@ def get_question(request):
         choices = list(Choices.objects.filter(question_id=question[0].id))
         logger.debug('Communicating with database to get choices for question')
         response_data = {
-            'question': question[0].question,
-            'choices': choices[0].choices,
-            'choices_id': choices[0].id
+            "question": question[0].question,
+            "question_id": question[0].id,
+            "choices": choices[0].choices,
+            "choices_id": choices[0].id
         }
         logger.debug('Sending data back to client')
         return JsonResponse(response_data)
@@ -57,14 +58,16 @@ def register_user(request):
             player_name = form.cleaned_data['player_name']
             room_name = form.cleaned_data['room_name']
             user_list.add_user(player_name)
-            logger.debug(user_list.get_connected_users())
+            logger.debug(f"{player_name} is joining the game")
             client.set('user_list', pickle.dumps(user_list))
             return HttpResponseRedirect(f"/{room_name}/{player_name}/")
 
 def unregister_user(request):
     if request.method == 'POST':
-        user_list.remove_user(json.loads(request.body))
+        player_data = json.loads(request.body)
+        user_list.remove_user(player_data)
         client.set('user_list', pickle.dumps(user_list))
+        logger.debug(f'{player_data["player"]} has left the game' )
         return HttpResponseRedirect('/')
     else:
         return HttpResponseNotAllowed(['POST'])
@@ -76,3 +79,9 @@ def get_user_table(request):
         json_data = json.dumps(table_data.get_connected_users())
         logger.debug(json_data)
         return JsonResponse(json_data, safe=False)
+
+def validate_answer(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        choice = Choices.objects.get(question_id_id=data['question_id'])
+        return JsonResponse({"answer": choice.check_correct_answer(data['answer'])})
