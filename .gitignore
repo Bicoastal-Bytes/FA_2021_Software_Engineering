@@ -1,3 +1,4 @@
 __pycache__/
 wheel-of-jeopardy/wheel_of_jeopardy/logs/*
 *.sqlite3
+.vscode/
