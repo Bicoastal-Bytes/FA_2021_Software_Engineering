@@ -24,4 +24,7 @@ class Choices(models.Model):
     choices = models.JSONField("Choices")
     correct_answer = models.CharField("Correct Answer", max_length=300)
 
+    def check_correct_answer(self, answer):
+        return True if answer == self.correct_answer else False
+
 
