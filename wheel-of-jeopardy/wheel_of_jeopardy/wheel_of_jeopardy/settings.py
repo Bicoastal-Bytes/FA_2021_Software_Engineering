@@ -126,3 +126,49 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# User Settings
+APPEND_SLASH=False
+ASGI_APPLICATION = 'wheel_of_jeopardy.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('localhost', 6379)],
+        }
+    }
+}
+LOGGING = {
+    'version': 1,                       # the dictConfig format version
+    'disable_existing_loggers': False,  # retain the default loggers
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/debug_log.log',
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '{asctime} {name} {funcName} {module} {message}',
+            'style': '{'
+        },
+    },
+    'loggers': {
+        'api.views': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+        'websockets.consumers':
+        {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+    }
+}
