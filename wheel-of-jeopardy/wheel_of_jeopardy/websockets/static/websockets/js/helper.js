@@ -31,3 +31,11 @@ function getCookie(name) {
 function getCategory() {
    let response =  fetch('/')
 }
+
+function appendData(data) {
+    var mainContainer = document.getElementById("id-remaining-questions");
+    var div = document.createElement("div");
+    console.log(data);
+    div.innerHTML = `Remaining Questions: ${data.remaining_questions}`;
+    mainContainer.appendChild(div);
+}
