@@ -1,6 +1,5 @@
 # websockets/consumers.py
 import json
-from re import S
 from channels.generic.websocket import AsyncWebsocketConsumer
 from .tracking import UserTracker
 import logging
