@@ -1,4 +1,3 @@
-import re
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseNotAllowed
@@ -6,7 +5,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from api.models import Category, Question, Choices
 import random
 import logging
-from websockets.forms import RegisterForm
+from websockets.forms import RegisterForm, CreationForm
 from websockets.tracking import UserTracker
 import pickle
 import redis
@@ -20,6 +19,7 @@ user_list = UserTracker()
 
 # Create your views here.
 def get_category(request):
+    """Get a random category when called"""
     if request.method == "GET":
         logger.debug('Recieved a GET request for a category')
         categories = list(Category.objects.all())
@@ -33,6 +33,7 @@ def get_category(request):
         return HttpResponseNotAllowed(['GET'])
 
 def get_question(request):
+    """Get a question from a specific category and point value"""
     if request.method == 'GET':
         category = request.GET['category']
         points = request.GET['points']
@@ -47,11 +48,15 @@ def get_question(request):
             "choices_id": choices[0].id
         }
         logger.debug('Sending data back to client')
+        remaining_questions = client.get("num_questions")
+        remaining_questions -= 1
+        client.set("num_questions", remaining_questions)
         return JsonResponse(response_data)
     else:
         return HttpResponseNotAllowed(['GET'])
 
 def register_user(request):
+    """Register a player and send them to the correct room"""
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
@@ -85,3 +90,21 @@ def validate_answer(request):
         data = json.loads(request.body)
         choice = Choices.objects.get(question_id_id=data['question_id'])
         return JsonResponse({"answer": choice.check_correct_answer(data['answer'])})
+
+def generate_game(request):
+    if request.method == 'POST':
+        form = CreationForm(request.POST)
+        if form.is_valid():
+            player_name = form.cleaned_data['player_name']
+            room_name = form.cleaned_data['room_name']
+            num_questions = form.cleaned_data['question_count']
+            user_list.add_user(player_name)
+            logger.debug(f"{player_name} is joining the game")
+            client.set('user_list', pickle.dumps(user_list))
+            logger.debug(f"Number of Questions {num_questions}")
+            client.set("num_questions", num_questions)
+            return HttpResponseRedirect(f"/{room_name}/{player_name}/")
+
+def get_remaining_questions(request):
+    num_questions = client.get("num_questions")
+    return JsonResponse({'remaining_questions': int(num_questions)})
