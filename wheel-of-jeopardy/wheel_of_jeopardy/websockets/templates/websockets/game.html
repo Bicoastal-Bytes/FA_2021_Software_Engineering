@@ -13,6 +13,7 @@
             <div class="container-fluid">
                 <span class="navbar-brand" href="javascript:void(0)">Wheel of Jeopardy</span>
                 <ul class="navbar-nav ms-auto">
+                    <div id="id-remaining-questions"></div>
                     <input class="btn btn-danger" id="leave-game-button" type="button" value="Leave Game">
                 </ul>
             </div>
@@ -51,6 +52,17 @@
         <script src="{% static 'websockets/js/generate_table.js' %}"></script>
         <script src="{% static 'websockets/js/helper.js' %}"></script>
         <script>
+            fetch('/api/remaining')
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    appendData(data);
+                })
+                .catch(function(err){
+                    console.log(`Error: ${err}`)
+                })
+            
             var table = document.querySelector("#connected-players-table");
             const roomName = JSON.parse(document.getElementById('game-room').textContent);
             const userName = JSON.parse(document.getElementById('user-name').textContent);
