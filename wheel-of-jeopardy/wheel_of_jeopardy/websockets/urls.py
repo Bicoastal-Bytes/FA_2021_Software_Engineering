@@ -7,5 +7,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('<str:game_room>/<str:user_name>/', views.game_room, name="game_room")
+    path('create', views.create_game, name='create_game'),
+    path('join', views.join_game, name='join_game'),
+    path('<str:game_room>/<str:user_name>/', views.game_room, name='game_room')
 ]
