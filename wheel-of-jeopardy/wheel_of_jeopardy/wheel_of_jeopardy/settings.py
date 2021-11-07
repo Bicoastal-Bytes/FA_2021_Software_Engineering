@@ -170,5 +170,10 @@ LOGGING = {
             'handlers': ['file'],
             'level': 'DEBUG',
         },
+        'websockets.tracking':
+        {
+            'handlers': ['file'],
+            'level': 'DEBUG'
+        }
     }
 }
