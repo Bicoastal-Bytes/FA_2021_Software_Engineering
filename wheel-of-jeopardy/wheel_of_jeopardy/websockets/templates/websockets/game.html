@@ -24,7 +24,7 @@
                     <div class="bg-yellow-300 h-1/3 m-auto flex-1">
                         <div class="box flex items-center justify-center">
                             <div class="w-1/3">
-                                <div id="id-remaining-questions"></div>
+                                <div class="bg-white hover:bg-gray-100 text-black py-2 px-4 rounded flex-1 my-2 outline-bk" id="id-remaining-questions"></div>
                             </div>
                         </div>                       
                     </div>  
@@ -46,21 +46,21 @@
             <div class="border-2 mb-4 mt-4 p-4 text-center" style="min-height: 200px;">
             <div id="status">
                 <p class="text-center text-yellow-300 m-16 text-2xl font-cinzel">Waiting for Players to Join...</p><br>
-                <button onclick="turnOn('wheel');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">Start Game</button>
+                <button onclick="resetWheel(); turnOn('wheel');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">Start Game</button>
             </div>
 
             <div id="wheel">
-                <p class="text-center text-yellow-300 m-16 text-2xl font-cinzel">Spin for a Cateogory</p>
+                <p class="text-center text-yellow-300 m-8 text-2xl font-cinzel">Spin for a Cateogory</p>
                 <div class="flex flex-row">
                     <div class="mx-auto">
                         <div class="mx-auto">
                             <form>
-                                <input type="radio" onchange="calculatePrize(1);"> Animals
-                                <input type="radio" onchange="calculatePrize(61);"> History
-                                <input type="radio" onchange="calculatePrize(121);"> Literature
-                                <input type="radio" onchange="calculatePrize(181);"> Philosophy
-                                <input type="radio" onchange="calculatePrize(241);"> Science
-                                <input type="radio" onchange="calculatePrize(301);"> Sports
+                                <input type="radio" name="wheelcat" onchange="calculatePrize(1); this.checked = false;"> Animals
+                                <input type="radio" name="wheelcat" onchange="calculatePrize(61); this.checked = false;"> History
+                                <input type="radio" name="wheelcat" onchange="calculatePrize(121); this.checked = false;"> Literature
+                                <input type="radio" name="wheelcat" onchange="calculatePrize(181); this.checked = false;"> Philosophy
+                                <input type="radio" name="wheelcat" onchange="calculatePrize(241); this.checked = false;"> Science
+                                <input type="radio" name="wheelcat" onchange="calculatePrize(301); this.checked = false;"> Sports
                             </form>
                         </div>
                         <div class="mx-auto">
@@ -142,7 +142,7 @@
                     </div>
                     <div class="w-1/6"></div>
                 </div>
-                <button onclick="turnOn('gameresult');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">switch</button>
+                <button onclick="turnOn('status');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">switch</button>
 
             </div>
 
@@ -334,8 +334,7 @@
     
                 setTimeout(() => {
                     turnOn('result');
-                }, 5000); 
-                
+                }, 5000);                 
             }
     
             function stopBuzzer () {
@@ -346,27 +345,31 @@
         <script type="text/javascript" src="https://bicoastal-bytes.github.io/FA_2021_Software_Engineering/images/Winwheel.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
         <script language='javascript' type='text/javascript'>
+         var theWheel   
+
+         function resetWheel () {
             let theWheel = new Winwheel({
-    'numSegments'  : 6,     // Specify number of segments.
-    'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
-    'textFontSize' : 28,    // Set font size as desired.
-    'segments'     :        // Define segments including colour and text.
-    [
-       {'fillStyle' : '#ffbdbd', 'text' : 'Animals'},
-       {'fillStyle' : '#89f26e', 'text' : 'History'},
-       {'fillStyle' : '#7de6ef', 'text' : 'Literature'},
-       {'fillStyle' : '#e7706f', 'text' : 'Philosophy'},
-       {'fillStyle' : '#eae56f', 'text' : 'Science'},
-       {'fillStyle' : '#b795fc', 'text' : 'Sports'}
-    ],
-    'animation' :
-    {
-        'type'          : 'spinToStop',
-        'duration'      : 5,
-        'spins'         : 8,
-        'callbackAfter' : 'drawTriangle()'
-    }
-});
+            'numSegments'  : 6,     // Specify number of segments.
+            'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
+            'textFontSize' : 28,    // Set font size as desired.
+            'segments'     :        // Define segments including colour and text.
+            [
+            {'fillStyle' : '#ffbdbd', 'text' : 'Animals'},
+            {'fillStyle' : '#89f26e', 'text' : 'History'},
+            {'fillStyle' : '#7de6ef', 'text' : 'Literature'},
+            {'fillStyle' : '#e7706f', 'text' : 'Philosophy'},
+            {'fillStyle' : '#eae56f', 'text' : 'Science'},
+            {'fillStyle' : '#b795fc', 'text' : 'Sports'}
+            ],
+            'animation' :
+            {
+                'type'          : 'spinToStop',
+                'duration'      : 5,
+                'spins'         : 8,
+                'callbackAfter' : 'drawTriangle()'
+            }
+        });
+    }  
 
 // Function with formula to work out stopAngle before spinning animation.
 // Called from Click of the Spin button.
