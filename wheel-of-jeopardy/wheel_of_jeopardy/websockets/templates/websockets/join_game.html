@@ -21,16 +21,12 @@
 
                 <div class="btn-group mb-3">
                 {% for game in games %}
-                    <button type="button" class="btn btn-primary">{{ game }}</button>
+                    <button type="button" class="btn btn-primary" id="id_{{ game }}" >{{ game }}</button>
                 {% endfor %}
                 </div>
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Room Name</span>
-                    <!-- <input id="room-name-input" type="text" class="form-control" placeholder="Room Name"> -->
-                    {{ form.room_name }}
-                    <input class="btn btn-success" id="room-name-submit" type="submit" value="Enter" >
-                </div>
+                <!-- id for {{form.room_name }} is id_room_name-->
+                {{ form.room_name }}
             </form>
             <script>
                 document.querySelector('#id_player_name').focus();
