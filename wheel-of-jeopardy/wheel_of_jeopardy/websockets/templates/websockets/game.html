@@ -46,7 +46,7 @@
             <div class="border-2 mb-4 mt-4 p-4 text-center" style="min-height: 200px;">
             <div id="status">
                 <p class="text-center text-yellow-300 m-16 text-2xl font-cinzel">Waiting for Players to Join...</p><br>
-                <button onclick="resetWheel(); turnOn('wheel');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">Start Game</button>
+                <button onclick="turnOn('wheel');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">Start Game</button>
             </div>
 
             <div id="wheel">
@@ -345,9 +345,7 @@
         <script type="text/javascript" src="https://bicoastal-bytes.github.io/FA_2021_Software_Engineering/images/Winwheel.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
         <script language='javascript' type='text/javascript'>
-         var theWheel   
-
-         function resetWheel () {
+         
             let theWheel = new Winwheel({
             'numSegments'  : 6,     // Specify number of segments.
             'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
@@ -369,7 +367,7 @@
                 'callbackAfter' : 'drawTriangle()'
             }
         });
-    }  
+    
 
 // Function with formula to work out stopAngle before spinning animation.
 // Called from Click of the Spin button.
