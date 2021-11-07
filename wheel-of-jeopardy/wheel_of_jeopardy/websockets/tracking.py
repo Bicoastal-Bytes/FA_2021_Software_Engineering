@@ -8,7 +8,10 @@ class UserTracker():
     
     def add_user(self, user):
         """Function to add a user's name and increment the user count"""
-        player = {"player": user}
+        player = {
+            "player": user ,
+            "active": False
+        }
         self.users.append(player)
         self.num_users += 1
     
@@ -24,3 +27,11 @@ class UserTracker():
     def get_connected_users(self):
         """Function to return the list of users connected to the game"""
         return self.users
+    
+    def make_player_active(self, player):
+        """Function to make a player active"""
+        self.users[player]['active'] = True
+    
+    def make_player_inactive(self, player):
+        """Function to make a player inactive"""
+        self.users[player]['active'] = False
