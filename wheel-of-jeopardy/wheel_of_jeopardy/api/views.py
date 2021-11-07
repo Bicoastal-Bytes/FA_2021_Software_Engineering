@@ -17,6 +17,8 @@ client = redis.client.StrictRedis()
 
 user_list = UserTracker()
 
+room_list = []
+
 # Create your views here.
 def get_category(request):
     """Get a random category when called"""
@@ -103,8 +105,19 @@ def generate_game(request):
             client.set('user_list', pickle.dumps(user_list))
             logger.debug(f"Number of Questions {num_questions}")
             client.set("num_questions", num_questions)
+            room_list.append(room_name)
+            __encode_pickle("games",room_list)
+
             return HttpResponseRedirect(f"/{room_name}/{player_name}/")
 
 def get_remaining_questions(request):
     num_questions = client.get("num_questions")
     return JsonResponse({'remaining_questions': int(num_questions)})
+
+
+def __decode_pickle(key):
+    return pickle.loads(client.get(key))
+
+def __encode_pickle(key, data):
+    encoded = pickle.dumps(data)
+    client.set(key, encoded)
