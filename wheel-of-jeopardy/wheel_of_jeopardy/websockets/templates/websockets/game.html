@@ -66,6 +66,7 @@
             var table = document.querySelector("#connected-players-table");
             const roomName = JSON.parse(document.getElementById('game-room').textContent);
             const userName = JSON.parse(document.getElementById('user-name').textContent);
+            let activePlayer = null;
             const chatSocket = new WebSocket(
                 'ws://'
                 + window.location.host
@@ -100,7 +101,12 @@
                             let header = Object.keys(table_data[0]);
                             generateTableHead(table, header);
                         });
-                        
+
+                        fetch('/api/active')
+                        .then((response) => response.json())
+                        .then(function(incoming) {
+                            activePlayer = incoming.player;
+                        });
                         break;
                     
                     case 'SEND':
@@ -115,6 +121,10 @@
                         });
                         deleteRow(data.user_name);
                         chat_log.value += (data.message + '\n');
+                        break;
+                    
+                    case 'SPIN':
+                        turnOn(data.element);
                         break;
                     // case "UPDATE_TABLE":
                     //     generateTable(table, data.connected_users);
@@ -132,6 +142,13 @@
                     document.querySelector('#chat-message-submit').click();
                 }
             };
+
+            document.querySelector('#spin-button').onclick = function(e) {
+                chatSocket.send(JSON.stringify({
+                    'event': 'SPIN',
+                    'element': 'buzzer'
+                }));
+            }
 
             document.querySelector('#chat-message-submit').onclick = function(e) {
                 const messageInputDom = document.querySelector('#chat-message-input');
