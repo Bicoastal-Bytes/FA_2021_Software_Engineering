@@ -10,7 +10,7 @@
     <body>
         <div class="container p-5">
             <h1 class='display-3 text-center'>Welcome to Wheel of Jeopardy!</h1>
-            {% if h_games|length > 0 %}
+            {% if games|length > 0 %}
             <form action="api/register" method="POST">
                 {% csrf_token %}
                 <div class="input-group mb-3">
