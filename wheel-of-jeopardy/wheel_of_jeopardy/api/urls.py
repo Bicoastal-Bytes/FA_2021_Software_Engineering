@@ -12,5 +12,6 @@ urlpatterns = [
     path('validate', views.validate_answer, name='validate'),
     path('table', views.get_user_table, name='table'),
     path('generate', views.generate_game, name="generate_game"),
-    path('remaining', views.get_remaining_questions, name="get_remaining_questions")
+    path('remaining', views.get_remaining_questions, name="get_remaining_questions"),
+    path('active', views.get_active_player, name="get_active_player"),
 ]
