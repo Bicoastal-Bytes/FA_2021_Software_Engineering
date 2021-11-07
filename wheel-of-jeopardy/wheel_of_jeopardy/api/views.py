@@ -101,6 +101,7 @@ def generate_game(request):
             room_name = form.cleaned_data['room_name']
             num_questions = form.cleaned_data['question_count']
             user_list.add_user(player_name)
+            user_list.make_player_active(player_name)
             logger.debug(f"{player_name} is joining the game")
             client.set('user_list', pickle.dumps(user_list))
             logger.debug(f"Number of Questions {num_questions}")
@@ -114,6 +115,11 @@ def get_remaining_questions(request):
     num_questions = client.get("num_questions")
     return JsonResponse({'remaining_questions': int(num_questions)})
 
+def get_active_player(request):
+    player_name = user_list.get_active_player()
+    logger.debug('Active Player Name' + player_name)
+    return JsonResponse({'player': player_name})
+
 
 def __decode_pickle(key):
     return pickle.loads(client.get(key))
@@ -121,3 +127,4 @@ def __decode_pickle(key):
 def __encode_pickle(key, data):
     encoded = pickle.dumps(data)
     client.set(key, encoded)
+
