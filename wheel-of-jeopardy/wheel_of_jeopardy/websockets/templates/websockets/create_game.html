@@ -37,23 +37,29 @@
                     <div class="flex mb-4">
                         <label id="playername" class="w-40">Player Name</label>
                         <!-- <input id="user-name-input" type="text" class="form-control" placeholder="Player Name"> -->
-                        {{ form.player_name }}
+                        <div class="flex-1">
+                            {{ form.player_name }}
+                        </div>  
                     </div>
                     <div class="flex mb-4">
-                        <label class="input-group-text" class="w-40">Question Count&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                        {{ form.question_count }}
+                        <label class="input-group-text" class="flex-1">Question Count</label>
+                        <div class="flex-1 ml-12">
+                            {{ form.question_count }}
+                        </div>  
                     </div>
                     <div class="flex mb-4">
-                        <label class="w-40">Room Name</label>
+                        <label class="flex-1">Room Name</label>
                         <!-- <input id="room-name-input" type="text" class="form-control" placeholder="Room Name"> -->
-                        {{ form.room_name }}
+                        <div class="flex-1">
+                            {{ form.room_name }}
+                        </div>  
                     </div>
                     <div class="flex mb-4">
                         <div class="w-40"></div>
                         <input class="p-1 hover:bg-yellow-100" id="room-name-submit" type="submit" value="Enter" >
                     </div>
                 </form>
-            </div>
+                </div>
             </div>
             <!-- ********************************************** -->
             <!--               End Content Area                 -->

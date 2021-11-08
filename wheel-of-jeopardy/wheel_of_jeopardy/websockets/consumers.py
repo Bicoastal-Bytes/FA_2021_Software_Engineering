@@ -78,6 +78,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     'message': message
                 }
             )
+        
+        if event == 'SPIN':
+            element = text_data_json['element']
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'chat_message',
+                    'event': 'SPIN',
+                    'element': element
+                }
+            )
         # if event == 'UPDATE_TABLE':
         #     users = self.userTrack.get_connected_users()
         #     await self.channel_layer.group_send(

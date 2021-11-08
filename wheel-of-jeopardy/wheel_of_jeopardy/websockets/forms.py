@@ -4,7 +4,7 @@ from django import forms
 class RegisterForm(forms.Form):
     """Form to register a player to a game"""
     player_name = forms.CharField(label="Player Name", max_length=100)
-    room_name = forms.CharField(label="Room Name", max_length=100)
+    room_name = forms.CharField(widget=forms.HiddenInput(), label="Room Name", max_length=100)
 
     def __init__(self, *args, **kwargs):
         """Basically here to make things look nice"""
