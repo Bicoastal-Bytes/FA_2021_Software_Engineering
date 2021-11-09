@@ -45,12 +45,16 @@
             <!-- ********************************************** -->
             <div class="border-2 mb-4 mt-4 p-4 text-center" style="min-height: 200px;">
             <div id="status">
+                <div id="status_activediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel"></div> <!-- not doing anything with these yet -->
+                <div id="status_inactivediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel"></div> <!-- not doing anything with these yet -->
+            
                 <p class="text-center text-yellow-300 m-16 text-2xl font-cinzel">Waiting for Players to Join...</p><br>
                 <button onclick="turnOn('wheel');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">Start Game</button>
             </div>
 
             <div id="wheel">
-                <p class="text-center text-yellow-300 m-8 text-2xl font-cinzel">Spin for a Cateogory</p>
+                <div id="wheel_activediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">You are spinning the wheel.</div>
+                <div id="wheel_inactivediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">Active is spinning the wheel.</div>
                 <div class="flex flex-row">
                     <div class="mx-auto">
                         <div class="mx-auto">
@@ -74,25 +78,29 @@
             </div>
 
             <div id="pointvalue">
-                <p class="text-center text-yellow-300 m-16 text-2xl font-cinzel">Choose a point value.</p>
-                <div class="flex">
-                    <div class="w-1/4"></div>
-                    <div class="mx-auto">
-                        <button class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">100</button><br>
-                        <button class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">300</button><br>
-                        <button class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">500</button>
+                <div id="pointvalue_activediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">Choose a point value.</div>
+                <div id="pointvalue_inactivediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">Active is choosing the points value for the question.</div>
+                    <div class="flex">                        
+                        <div class="w-1/4"></div>
+                        <div class="mx-auto">
+                            <button id="button100" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">100</button><br>
+                            <button id="button300" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">300</button><br>
+                            <button id="button500" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">500</button>
+                        </div>
+                        <div class="mx-auto">
+                            <button id="button200" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">200</button><br>
+                            <button id="button400" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">400</button><br> 
+                            <button id="button600" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">600</button>
+                        </div>
+                        <div class="w-1/4"></div>
                     </div>
-                    <div class="mx-auto">
-                        <button class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">200</button><br>
-                        <button class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">400</button><br> 
-                        <button class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">600</button>
-                    </div>
-                    <div class="w-1/4"></div>
+                    <button onclick="startBuzzer(); turnOn('buzzer');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">switch</button>
                 </div>
                 
-            </div>
 
             <div id="buzzer">
+                <div id="buzzer_activediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel"></div>
+                <div id="buzzer_inactivediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel"></div>
                 <div class="flex">
                     <div class="mx-auto">                       
                         <div class="bg-yellow-300 text-black py-4 px-4 rounded text-sm mt-2 px-20 outline-bk w-full text-center">
@@ -110,9 +118,37 @@
                 </div>
             </div>
 
+            <div id="answer">
+                <div id="answer_activediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">You are answering the question.</div>
+                <div id="answer_inactivediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">Active is answering the question.</div>
+                
+                <div class="flex">
+                    <div class="mx-auto">                       
+                        <div class="bg-yellow-300 text-black py-4 px-4 rounded text-sm mt-2 px-20 outline-bk w-full text-center">
+                            <p>What animal dances to get a potential mate's attention?</p>
+                            <p>a. Elephants b. Monkies c. Birds d. Giraffes</p>
+                            <p class="mt-2">&darr; Hit the buzzer to answer &darr; </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex">
+                    <div class="w-1/4"></div>
+                    <div class="mx-auto">
+                        <button id="buttona" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="turnOn('result');">A</button><br>
+                        <button id="buttonb" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="turnOn('result');">B</button>
+                    </div>
+                    <div class="mx-auto">
+                        <button id="buttonc" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="turnOn('result');">C</button><br>
+                         <button id="buttond" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="turnOn('result');">D</button>
+                    </div>
+                    <div class="w-1/4"></div>
+                </div>
+                <button onclick="turnOn('result');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">switch</button>
+            </div>
+
             <div id="result">
-                <p class="text-center text-yellow-300 m-16 text-2xl font-cinzel">Laurie answered the question correctly!</p>
-               
+                <div id="result_activediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">You answered the question (in)correctly.</div>
+                <div id="result_inactivediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">Active answered the question (in)correctly.</div>              
 
                 <div class="flex">
                     <div class="w-1/6"></div>
@@ -142,11 +178,15 @@
                     </div>
                     <div class="w-1/6"></div>
                 </div>
-                <button onclick="turnOn('status');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">switch</button>
+                <button onclick="turnOn('wheel');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">switch</button>
 
             </div>
 
             <div id="gameresult">
+                <div id="gameresult_activediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel"></div>
+                <div id="gameresult_inactivediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel"></div>
+           
+                <div class="gameresult_inactiveplayermessage gameresult_activeplayerdiv"></div>
                 <p class="text-center text-yellow-300 m-16 text-2xl font-cinzel">game result</p>
             </div>
             </div>
@@ -317,15 +357,54 @@
             var elapsedTime = 0;
     
             function turnOff () {
-                const pageNames = [ {x:'status'}, {x:'wheel'}, {x:'pointvalue'}, {x:'buzzer'}, {x:'result'}, {x:'gameresult'}];
+                const pageNames = [ {x:'status'}, {x:'wheel'}, {x:'pointvalue'}, {x:'buzzer'}, {x:'answer'}, {x:'result'}, {x:'gameresult'}];
                 pageNames.forEach((element) => {
                     document.getElementById(element.x).style.display = 'none';
                 });
             }
     
             function turnOn (whichDiv) {
+                var original;
+                var result;
+                
                 turnOff(); 
                 document.getElementById(whichDiv).style.display = 'block';
+                
+                if (whichDiv == 'wheel') {
+                    setUpWheel();
+                }
+                
+                if (userName == activePlayer) {
+                    document.getElementById(whichDiv + '_activediv').style.display = 'block';
+                    document.getElementById(whichDiv + '_inactivediv').style.display = 'none';
+                } else {
+                    /* this deals with putting the active players name on the screen */
+                    if (whichDiv == 'wheel' || whichDiv == 'pointvalue' || whichDiv == 'answer' || whichDiv == 'result') {
+                        original = document.getElementById(whichDiv + '_inactivediv').innerHTML;
+                        result = original.substr(original.indexOf(" ") + 1);
+                        document.getElementById(whichDiv + '_inactivediv').innerHTML = activePlayer + ' ' + result;
+                    }
+
+                    /* grays out values for inactive player */
+                    if (whichDiv == 'pointvalue') {
+                        document.getElementById("button100").disabled = true; document.getElementById("button100").style.backgroundColor = 'gray';
+                        document.getElementById("button200").disabled = true; document.getElementById("button200").style.backgroundColor = 'gray';
+                        document.getElementById("button300").disabled = true; document.getElementById("button300").style.backgroundColor = 'gray';
+                        document.getElementById("button400").disabled = true; document.getElementById("button400").style.backgroundColor = 'gray';
+                        document.getElementById("button500").disabled = true; document.getElementById("button500").style.backgroundColor = 'gray';
+                        document.getElementById("button600").disabled = true; document.getElementById("button600").style.backgroundColor = 'gray';
+                    }
+
+                    /* grays out question choices for inactive player */
+                    if (whichDiv == 'pointvalue') {
+                        document.getElementById("buttona").disabled = true; document.getElementById("buttona").style.backgroundColor = 'gray';
+                        document.getElementById("buttonb").disabled = true; document.getElementById("buttonb").style.backgroundColor = 'gray';
+                        document.getElementById("buttonc").disabled = true; document.getElementById("buttonc").style.backgroundColor = 'gray';
+                        document.getElementById("buttond").disabled = true; document.getElementById("buttond").style.backgroundColor = 'gray';
+                    }
+                    document.getElementById(whichDiv + '_inactivediv').style.display = 'block';
+                    document.getElementById(whichDiv + '_activediv').style.display = 'none';
+                }
             }
     
             function startBuzzer () {
@@ -333,20 +412,24 @@
                 elapsedTime = 0             // reset buzzer & elapsedTime = 0 means no buzzer press
     
                 setTimeout(() => {
-                    turnOn('result');
+                    turnOn('answer');
                 }, 5000);                 
             }
     
             function stopBuzzer () {
                     elapsedTime = Math.floor((Date.now() - buzzerStart));
                     console.log(elapsedTime);
+                    /* turnOn('answer'); */ /* i have a bug here where if you press this it still forwards in 5 seconds */
             }
         </script>
         <script type="text/javascript" src="https://bicoastal-bytes.github.io/FA_2021_Software_Engineering/images/Winwheel.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
         <script language='javascript' type='text/javascript'>
          
-            let theWheel = new Winwheel({
+         let theWheel;
+
+         function setUpWheel () {
+            theWheel = new Winwheel({
             'numSegments'  : 6,     // Specify number of segments.
             'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
             'textFontSize' : 28,    // Set font size as desired.
@@ -367,6 +450,9 @@
                 'callbackAfter' : 'drawTriangle()'
             }
         });
+
+    }
+    
     
 
 // Function with formula to work out stopAngle before spinning animation.
