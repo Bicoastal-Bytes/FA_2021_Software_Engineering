@@ -1,0 +1,125 @@
+{
+    "response_code": 0,
+    "results": [
+        {
+            "category": "Science: Computers",
+            "difficulty": "medium",
+            "question": "Which internet company began life as an online bookstore called &#039;Cadabra&#039;?",
+            "correct_answer": "Amazon",
+            "choices": [
+                "Amazon",
+                "eBay",
+                "Overstock",
+                "Shopify"
+            ]
+        },
+        {
+            "category": "Science: Computers",
+            "difficulty": "easy",
+            "question": "What does the &quot;MP&quot; stand for in MP3?",
+            "correct_answer": "Moving Picture",
+            "choices": [
+                "Moving Picture",
+                "Music Player",
+                "Multi Pass",
+                "Micro Point"
+            ]
+        },
+        {
+            "category": "Science: Computers",
+            "difficulty": "medium",
+            "question": "What was the name given to Android 4.3?",
+            "correct_answer": "Jelly Bean",
+            "choices": [
+                "Jelly Bean",
+                "Lollipop",
+                "Nutella",
+                "Froyo"
+            ]
+        },
+        {
+            "category": "Science: Computers",
+            "difficulty": "hard",
+            "question": "What port does HTTP run on?",
+            "correct_answer": "80",
+            "choices": [
+                "80",
+                "53",
+                "443",
+                "23"
+            ]
+        },
+        {
+            "category": "Science: Computers",
+            "difficulty": "medium",
+            "question": "What is known as &quot;the brain&quot; of the Computer?",
+            "correct_answer": "Central Processing Unit",
+            "choices": [
+                "Central Processing Unit",
+                "Motherboard",
+                "Graphics Processing Unit",
+                "Keyboard"
+            ]
+        },
+        {
+            "category": "Science: Computers",
+            "difficulty": "easy",
+            "question": "The C programming language was created by this American computer scientist. ",
+            "correct_answer": "Dennis Ritchie",
+            "choices": [
+                "Dennis Ritchie",
+                "Tim Berners Lee",
+                "al-Khw\u0101rizm\u012b",
+                "Willis Ware"
+            ]
+        },
+        {
+            "category": "Science: Computers",
+            "difficulty": "hard",
+            "question": "What is the name given to layer 4 of the Open Systems Interconnection (ISO) model?",
+            "correct_answer": "Transport",
+            "choices": [
+                "Transport",
+                "Session",
+                "Data link",
+                "Network"
+            ]
+        },
+        {
+            "category": "Science: Computers",
+            "difficulty": "medium",
+            "question": "The teapot often seen in many 3D modeling applications is called what?",
+            "correct_answer": "Utah Teapot",
+            "choices": [
+                "Utah Teapot",
+                "Pixar Teapot",
+                "3D Teapot",
+                "Tennessee Teapot"
+            ]
+        },
+        {
+            "category": "Science: Computers",
+            "difficulty": "hard",
+            "question": "What type of sound chip does the Super Nintendo Entertainment System (SNES) have?",
+            "correct_answer": "ADPCM Sampler",
+            "choices": [
+                "ADPCM Sampler",
+                "FM Synthesizer",
+                "Programmable Sound Generator (PSG)",
+                "PCM Sampler"
+            ]
+        },
+        {
+            "category": "Science: Computers",
+            "difficulty": "hard",
+            "question": "What is the codename of the eighth generation Intel Core micro-architecture launched in October 2017?",
+            "correct_answer": "Coffee Lake",
+            "choices": [
+                "Coffee Lake",
+                "Sandy Bridge",
+                "Skylake",
+                "Broadwell"
+            ]
+        }
+    ]
+}

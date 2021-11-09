@@ -1,0 +1,124 @@
+{
+    "results": [
+        {
+            "category": "Entertainment: Books",
+            "difficulty": "easy",
+            "question": "What was the name of Captain Nemo&#039;s submarine in &quot;20,000 Leagues Under the Sea&quot;?",
+            "correct_answer": "The Nautilus",
+            "choices": [
+                "The Nautilus",
+                "The Neptune",
+                "The Poseidon  ",
+                "The Atlantis"
+            ]
+        },
+        {
+            "category": "Entertainment: Books",
+            "difficulty": "hard",
+            "question": "In the Harry Potter universe, what is Cornelius Fudge&#039;s middle name?",
+            "correct_answer": "Oswald",
+            "choices": [
+                "Oswald",
+                "James",
+                "Harold",
+                "Christopher"
+            ]
+        },
+        {
+            "category": "Entertainment: Books",
+            "difficulty": "easy",
+            "question": "Under what pseudonym did Stephen King publish five novels between 1977 and 1984?",
+            "correct_answer": "Richard Bachman",
+            "choices": [
+                "Richard Bachman",
+                "J. D. Robb",
+                "Mark Twain",
+                "Lewis Carroll"
+            ]
+        },
+        {
+            "category": "Entertainment: Books",
+            "difficulty": "easy",
+            "question": "What is the title of the first Sherlock Holmes book by Arthur Conan Doyle?",
+            "correct_answer": "A Study in Scarlet",
+            "choices": [
+                "A Study in Scarlet",
+                "The Sign of the Four",
+                "A Case of Identity",
+                "The Doings of Raffles Haw"
+            ]
+        },
+        {
+            "category": "Entertainment: Books",
+            "difficulty": "medium",
+            "question": "What book series published by Jim Butcher follows a wizard in modern day Chicago?",
+            "correct_answer": "The Dresden Files",
+            "choices": [
+                "The Dresden Files",
+                "A Hat in Time",
+                "The Cinder Spires",
+                "My Life as a Teenage Wizard"
+            ]
+        },
+        {
+            "category": "Entertainment: Books",
+            "difficulty": "medium",
+            "question": "Which of the following was the author of &quot;Username Evie&quot;?",
+            "correct_answer": "Joe Sugg",
+            "choices": [
+                "Joe Sugg",
+                "Zoe Sugg",
+                "Joe Weller",
+                "Alfie Deyes"
+            ]
+        },
+        {
+            "category": "Entertainment: Books",
+            "difficulty": "hard",
+            "question": "In the Magic: The Gathering universe, the Fallen Empires expansion takes place on which continent?",
+            "correct_answer": "Sarpadia",
+            "choices": [
+                "Sarpadia",
+                "Otaria",
+                "Terisiare",
+                "Shiv"
+            ]
+        },
+        {
+            "category": "Entertainment: Books",
+            "difficulty": "easy",
+            "question": "What was the first ever entry written for the SCP Foundation collaborative writing project?",
+            "correct_answer": "SCP-173",
+            "choices": [
+                "SCP-173",
+                "SCP-001",
+                "SCP-999",
+                "SCP-1459"
+            ]
+        },
+        {
+            "category": "Entertainment: Books",
+            "difficulty": "easy",
+            "question": "What was Sir Handel&#039;s original name in &quot;The Railway Series&quot; and it&#039;s animated counterpart &quot;Thomas and Friends?&quot;",
+            "correct_answer": "Falcon",
+            "choices": [
+                "Falcon",
+                "Eagle",
+                "Kyte",
+                "Swallow"
+            ]
+        },
+        {
+            "category": "Entertainment: Books",
+            "difficulty": "hard",
+            "question": "What is the name of the town in which Lily and James Potter are buried?",
+            "correct_answer": "Godric&#039;s Hollow",
+            "choices": [
+                "Godric&#039;s Hollow",
+                "Hogsmeade",
+                "Ottery St. Catchpole",
+                "Little Hangleton"
+            ]
+        }
+    ]
+}

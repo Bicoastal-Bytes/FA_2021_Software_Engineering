@@ -1,0 +1,124 @@
+{
+    "results": [
+        {
+            "category": "Animals",
+            "difficulty": "easy",
+            "question": "Hippocampus is the Latin name for which marine creature?",
+            "correct_answer": "Seahorse",
+            "choices": [
+                "Seahorse",
+                "Dolphin",
+                "Whale",
+                "Octopus"
+            ]
+        },
+        {
+            "category": "Animals",
+            "difficulty": "hard",
+            "question": "How many known living species of hyenas are there?",
+            "correct_answer": "4",
+            "choices": [
+                "4",
+                "8",
+                "6",
+                "2"
+            ]
+        },
+        {
+            "category": "Animals",
+            "difficulty": "medium",
+            "question": "For what reason would a spotted hyena &quot;laugh&quot;?",
+            "correct_answer": "Nervousness",
+            "choices": [
+                "Nervousness",
+                "Excitement",
+                "Aggression",
+                "Exhaustion"
+            ]
+        },
+        {
+            "category": "Animals",
+            "difficulty": "medium",
+            "question": "Which animal was part of an Russian domestication experiment in 1959?",
+            "correct_answer": "Foxes",
+            "choices": [
+                "Foxes",
+                "Pigeons",
+                "Bears",
+                "Alligators"
+            ]
+        },
+        {
+            "category": "Animals",
+            "difficulty": "hard",
+            "question": "Which of these animals is NOT a lizard?",
+            "correct_answer": "Tuatara",
+            "choices": [
+                "Tuatara",
+                "Komodo Dragon",
+                "Gila Monster",
+                "Green Iguana"
+            ]
+        },
+        {
+            "category": "Animals",
+            "difficulty": "easy",
+            "question": "What is Grumpy Cat&#039;s real name?",
+            "correct_answer": "Tardar Sauce",
+            "choices": [
+                "Tardar Sauce",
+                "Sauce",
+                "Minnie",
+                "Broccoli"
+            ]
+        },
+        {
+            "category": "Animals",
+            "difficulty": "easy",
+            "question": "Which class of animals are newts members of?",
+            "correct_answer": "Amphibian",
+            "choices": [
+                "Amphibian",
+                "Fish",
+                "Reptiles",
+                "Mammals"
+            ]
+        },
+        {
+            "category": "Animals",
+            "difficulty": "medium",
+            "question": "What is the fastest animal?",
+            "correct_answer": "Peregrine Falcon",
+            "choices": [
+                "Peregrine Falcon",
+                "Golden Eagle",
+                "Cheetah",
+                "Horsefly"
+            ]
+        },
+        {
+            "category": "Animals",
+            "difficulty": "easy",
+            "question": "How many teeth does an adult rabbit have?",
+            "correct_answer": "28",
+            "choices": [
+                "28",
+                "30",
+                "26",
+                "24"
+            ]
+        },
+        {
+            "category": "Animals",
+            "difficulty": "hard",
+            "question": "To which biological phylum do all mammals, birds and reptiles belong?",
+            "correct_answer": "Chordata",
+            "choices": [
+                "Chordata",
+                "Echinodermata",
+                "Annelida",
+                "Placazoa"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,124 @@
+{
+    "results": [
+        {
+            "category": "Celebrities",
+            "difficulty": "easy",
+            "question": "Named after a character he played in a 1969 film, what is the name of the ski resort in Utah that Robert Redford bought in 1968?",
+            "correct_answer": "Sundance",
+            "choices": [
+                "Sundance",
+                "Woodward",
+                "Turner",
+                "Booker"
+            ]
+        },
+        {
+            "category": "Celebrities",
+            "difficulty": "easy",
+            "question": "By what name is Carlos Estevez better known? ",
+            "correct_answer": "Charlie Sheen",
+            "choices": [
+                "Charlie Sheen",
+                "Ricky Martin",
+                "Bruno Mars",
+                "Joaquin Phoenix"
+            ]
+        },
+        {
+            "category": "Celebrities",
+            "difficulty": "medium",
+            "question": "What year did radio icon Howard Stern start a job at radio station WNBC?",
+            "correct_answer": "1982",
+            "choices": [
+                "1982",
+                "1985",
+                "1984",
+                "1995"
+            ]
+        },
+        {
+            "category": "Celebrities",
+            "difficulty": "medium",
+            "question": "When was Elvis Presley born?",
+            "correct_answer": "January 8, 1935",
+            "choices": [
+                "January 8, 1935",
+                "December 13, 1931",
+                "July 18, 1940",
+                "April 17, 1938"
+            ]
+        },
+        {
+            "category": "Celebrities",
+            "difficulty": "medium",
+            "question": "Where was Kanye West born?",
+            "correct_answer": "Atlanta, Georgia",
+            "choices": [
+                "Atlanta, Georgia",
+                "Chicago, Illinois",
+                "Los Angeles, California",
+                "Detroit, Michigan"
+            ]
+        },
+        {
+            "category": "Celebrities",
+            "difficulty": "medium",
+            "question": "In which of these TV shows did the chef Gordon Ramsay not appear?",
+            "correct_answer": "Auction Hunters",
+            "choices": [
+                "Auction Hunters",
+                "Ramsay&#039;s Kitchen Nightmares",
+                "Hotel Hell",
+                "Hell&#039;s Kitchen"
+            ]
+        },
+        {
+            "category": "Celebrities",
+            "difficulty": "medium",
+            "question": "Who is &quot;James Rolfe&quot; better known as?",
+            "correct_answer": "The Angry Video Game Nerd",
+            "choices": [
+                "The Angry Video Game Nerd",
+                "TotalBiscuit",
+                "PeanutButterGamer",
+                "PewDiePie"
+            ]
+        },
+        {
+            "category": "Celebrities",
+            "difficulty": "hard",
+            "question": "Gabe Newell was born in which year?",
+            "correct_answer": "1962 ",
+            "choices": [
+                "1962 ",
+                "1970",
+                "1960",
+                "1972"
+            ]
+        },
+        {
+            "category": "Celebrities",
+            "difficulty": "hard",
+            "question": "Billy Herrington is from which US state?",
+            "correct_answer": "New York",
+            "choices": [
+                "New York",
+                "Arizona",
+                "California",
+                "Georgia"
+            ]
+        },
+        {
+            "category": "Celebrities",
+            "difficulty": "medium",
+            "question": "What caused Jake Lloyd who played Anakin Skywalker in The Phantom Menace to quit acting?",
+            "correct_answer": "Bullying",
+            "choices": [
+                "Bullying",
+                "Criminal Record",
+                "Nomination for Worst Actor",
+                "Racism"
+            ]
+        }
+    ]
+}

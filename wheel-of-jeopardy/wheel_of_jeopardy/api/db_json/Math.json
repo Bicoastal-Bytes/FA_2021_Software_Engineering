@@ -1,0 +1,125 @@
+{
+    "response_code": 0,
+    "results": [
+        {
+            "category": "Science: Mathematics",
+            "difficulty": "hard",
+            "question": "What is the derivative of Acceleration with respect to time?",
+            "correct_answer": "Jerk",
+            "choices": [
+                "Jerk",
+                "Shift",
+                "Bump",
+                "Slide"
+            ]
+        },
+        {
+            "category": "Science: Mathematics",
+            "difficulty": "medium",
+            "question": "What is the area of a circle with a diameter of 20 inches if &pi;= 3.1415?",
+            "correct_answer": "314.15 Inches",
+            "choices": [
+                "314.15 Inches",
+                "380.1215 Inches",
+                "3141.5 Inches",
+                "1256.6 Inches"
+            ]
+        },
+        {
+            "category": "Science: Mathematics",
+            "difficulty": "medium",
+            "question": "What is the Roman numeral for 500?",
+            "correct_answer": "D",
+            "choices": [
+                "D",
+                "L",
+                "C",
+                "X"
+            ]
+        },
+        {
+            "category": "Science: Mathematics",
+            "difficulty": "easy",
+            "question": "What prime number comes next after 19?",
+            "correct_answer": "23",
+            "choices": [
+                "23",
+                "25",
+                "21",
+                "27"
+            ]
+        },
+        {
+            "category": "Science: Mathematics",
+            "difficulty": "easy",
+            "question": "How many sides does a heptagon have?",
+            "correct_answer": "7",
+            "choices": [
+                "7",
+                "8",
+                "6",
+                "5"
+            ]
+        },
+        {
+            "category": "Science: Mathematics",
+            "difficulty": "hard",
+            "question": "What is the plane curve proposed by Descartes to challenge Fermat&#039;s extremum-finding techniques called?",
+            "correct_answer": "Folium of Descartes",
+            "choices": [
+                "Folium of Descartes",
+                "Elliptic Paraboloid of Descartes",
+                "Cartesian Coordinates",
+                "Descarte&#039;s Helicoid"
+            ]
+        },
+        {
+            "category": "Science: Mathematics",
+            "difficulty": "easy",
+            "question": "What is the correct order of operations for solving equations?",
+            "correct_answer": "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+            "choices": [
+                "Parentheses, Exponents, Multiplication, Division, Addition, Subtraction",
+                "Addition, Multiplication, Division, Subtraction, Addition, Parentheses",
+                "Parentheses, Exponents, Addition, Substraction, Multiplication, Division",
+                "The order in which the operations are written."
+            ]
+        },
+        {
+            "category": "Science: Mathematics",
+            "difficulty": "hard",
+            "question": "Which of these numbers is closest to the total number of possible states for an army standard Enigma Machine?",
+            "correct_answer": "1.58 x 10^20",
+            "choices": [
+                "1.58 x 10^20",
+                "1.58 x 10^22",
+                "1.58 x  10^18",
+                "1.58 x 10^24"
+            ]
+        },
+        {
+            "category": "Science: Mathematics",
+            "difficulty": "hard",
+            "question": "Which of the following famous mathematicians died in a duel at the age of 20?",
+            "correct_answer": "Galois",
+            "choices": [
+                "Galois",
+                "Abel",
+                "Euler",
+                "Gauss"
+            ]
+        },
+        {
+            "category": "Science: Mathematics",
+            "difficulty": "medium",
+            "question": "Which mathematician refused the Fields Medal?",
+            "correct_answer": "Grigori Perelman",
+            "choices": [
+                "Grigori Perelman",
+                "Andrew Wiles",
+                "Terence Tao",
+                "Edward Witten"
+            ]
+        }
+    ]
+}

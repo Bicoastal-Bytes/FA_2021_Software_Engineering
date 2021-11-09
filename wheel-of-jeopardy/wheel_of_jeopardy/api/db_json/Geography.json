@@ -1,0 +1,125 @@
+{
+    "response_code": 0,
+    "results": [
+        {
+            "category": "Geography",
+            "difficulty": "easy",
+            "question": "Which country does Austria not border?",
+            "correct_answer": "France",
+            "choices": [
+                "France",
+                "Slovenia",
+                "Switzerland",
+                "Slovakia"
+            ]
+        },
+        {
+            "category": "Geography",
+            "difficulty": "easy",
+            "question": "What is the capital of Jamaica?",
+            "correct_answer": "Kingston",
+            "choices": [
+                "Kingston",
+                "San Juan",
+                "Port-au-Prince",
+                "Bridgetown"
+            ]
+        },
+        {
+            "category": "Geography",
+            "difficulty": "easy",
+            "question": "What is the 15th letter of the Greek alphabet?",
+            "correct_answer": "Omicron (&Omicron;)",
+            "choices": [
+                "Omicron (&Omicron;)",
+                "Sigma (&Sigma;)",
+                "Pi (&Pi;)",
+                "Nu (&Nu;)"
+            ]
+        },
+        {
+            "category": "Geography",
+            "difficulty": "easy",
+            "question": "What name was historically used for the Turkish city currently known as Istanbul?",
+            "correct_answer": "Constantinople",
+            "choices": [
+                "Constantinople",
+                "H&uuml;davendigar",
+                "S&ouml;\u011f&uuml;t",
+                "Adrianople"
+            ]
+        },
+        {
+            "category": "Geography",
+            "difficulty": "hard",
+            "question": "Which is the largest freshwater lake in the world?",
+            "correct_answer": "Lake Superior ",
+            "choices": [
+                "Lake Superior ",
+                "Caspian Sea",
+                "Lake Michigan",
+                "Lake Huron"
+            ]
+        },
+        {
+            "category": "Geography",
+            "difficulty": "medium",
+            "question": "The towns of Brugelette, Arlon and Ath are located in which country?",
+            "correct_answer": "Belgium",
+            "choices": [
+                "Belgium",
+                "Andorra",
+                "France",
+                "Luxembourg"
+            ]
+        },
+        {
+            "category": "Geography",
+            "difficulty": "easy",
+            "question": "Harvard University is located in which city?",
+            "correct_answer": "Cambridge",
+            "choices": [
+                "Cambridge",
+                "Providence",
+                "New York",
+                "Washington D.C."
+            ]
+        },
+        {
+            "category": "Geography",
+            "difficulty": "medium",
+            "question": "What is the busiest port in Europe?",
+            "correct_answer": "Port of Rotterdam",
+            "choices": [
+                "Port of Rotterdam",
+                "Port of Antwerp",
+                "Port of Hamburg",
+                "Port of Amsterdam"
+            ]
+        },
+        {
+            "category": "Geography",
+            "difficulty": "hard",
+            "question": "What is Canada&#039;s largest island?",
+            "correct_answer": "Baffin Island",
+            "choices": [
+                "Baffin Island",
+                "Prince Edward Island",
+                "Vancouver Island",
+                "Newfoundland"
+            ]
+        },
+        {
+            "category": "Geography",
+            "difficulty": "medium",
+            "question": "Colchester Overpass, otherwise known as &quot;Bunny Man Bridge&quot;, is located where?",
+            "correct_answer": "Fairfax County, Virginia",
+            "choices": [
+                "Fairfax County, Virginia",
+                "Medford, Oregon",
+                "Braxton County, Virgina",
+                "Lemon Grove, California"
+            ]
+        }
+    ]
+}
