@@ -83,14 +83,14 @@
                     <div class="flex">                        
                         <div class="w-1/4"></div>
                         <div class="mx-auto">
-                            <button id="button100" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">100</button><br>
-                            <button id="button300" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">300</button><br>
-                            <button id="button500" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">500</button>
+                            <button id="button10" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">10</button><br>
+                            <button id="button30" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">30</button><br>
+                            <button id="button50" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">50</button>
                         </div>
                         <div class="mx-auto">
-                            <button id="button200" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">200</button><br>
-                            <button id="button400" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">400</button><br> 
-                            <button id="button600" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">600</button>
+                            <button id="button20" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">20</button><br>
+                            <button id="button40" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">40</button><br> 
+                            
                         </div>
                         <div class="w-1/4"></div>
                     </div>
@@ -387,12 +387,11 @@
 
                     /* grays out values for inactive player */
                     if (whichDiv == 'pointvalue') {
-                        document.getElementById("button100").disabled = true; document.getElementById("button100").style.backgroundColor = 'gray';
-                        document.getElementById("button200").disabled = true; document.getElementById("button200").style.backgroundColor = 'gray';
-                        document.getElementById("button300").disabled = true; document.getElementById("button300").style.backgroundColor = 'gray';
-                        document.getElementById("button400").disabled = true; document.getElementById("button400").style.backgroundColor = 'gray';
-                        document.getElementById("button500").disabled = true; document.getElementById("button500").style.backgroundColor = 'gray';
-                        document.getElementById("button600").disabled = true; document.getElementById("button600").style.backgroundColor = 'gray';
+                        document.getElementById("button10").disabled = true; document.getElementById("button10").style.backgroundColor = 'gray';
+                        document.getElementById("button20").disabled = true; document.getElementById("button20").style.backgroundColor = 'gray';
+                        document.getElementById("button30").disabled = true; document.getElementById("button30").style.backgroundColor = 'gray';
+                        document.getElementById("button40").disabled = true; document.getElementById("button40").style.backgroundColor = 'gray';
+                        document.getElementById("button50").disabled = true; document.getElementById("button50").style.backgroundColor = 'gray';
                     }
 
                     /* grays out question choices for inactive player */
