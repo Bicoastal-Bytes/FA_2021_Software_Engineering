@@ -106,7 +106,7 @@
                 <div class="flex">
                     <div class="mx-auto">   
                         
-                    <div id="buzzercategory" class="bg-aqua text-black py-4 px-4 rounded text-xl mt-10 px-20 outline-bk w-full text-center"></div>                    
+                        <div id="buzzercategory" class="bg-aqua text-black py-4 px-4 rounded text-xl mt-10 px-20 outline-bk w-full text-center"></div>                    
                         <div class="bg-yellow-300 text-black py-4 px-4 rounded text-sm mt-2 px-20 outline-bk w-full text-center">
                             <div id="buzzerquestion"></div>
                             <div id="buzzeranswers"></div>
@@ -128,10 +128,10 @@
                 
                 <div class="flex">
                     <div class="mx-auto">                       
+                        <div id="answercategory" class="bg-aqua text-black py-4 px-4 rounded text-xl mt-10 px-20 outline-bk w-full text-center"></div>                    
                         <div class="bg-yellow-300 text-black py-4 px-4 rounded text-sm mt-2 px-20 outline-bk w-full text-center">
-                            <p>What animal dances to get a potential mate's attention?</p>
-                            <p>a. Elephants b. Monkies c. Birds d. Giraffes</p>
-                            <p class="mt-2">&darr; Hit the buzzer to answer &darr; </p>
+                            <div id="answerquestion"></div>
+                            <div id="answeranswers"></div>
                         </div>
                     </div>
                 </div>
@@ -250,16 +250,31 @@
             function turnOn (whichDiv) {
                 var original;
                 var result;
+                var myList
                 
                 turnOff(); 
                 document.getElementById(whichDiv).style.display = 'block';
                 
                 if (whichDiv == 'wheel') {
+                    /* initialize the wheel each turn */
                     setUpWheel();
+                    /* reset turned off divs for next turn */
+                    myList = ["button10", "button20", "button30", "button40", "button50"];
+                    disableEnable(myList, 'enable');
+                    myList = ["buttona", "buttonb", "buttonc", "buttond"]
+                    disableEnable(myList, 'enable');
+                    /* hide spin the wheel button if inactive */
+                    if (userName != activePlayer){
+                        document.getElementById('spinthewheel').style.display = 'none';
+                    }
                 } else if (whichDiv == 'buzzer') {
                     document.getElementById('buzzercategory').innerHTML = category;
                     document.getElementById('buzzerquestion').innerHTML = question;
                     document.getElementById('buzzeranswers').innerHTML = choices;
+                } else if (whichDiv == 'answer') {
+                    document.getElementById('answercategory').innerHTML = category;
+                    document.getElementById('answerquestion').innerHTML = question;
+                    document.getElementById('answeranswers').innerHTML = choices;
                 }
                 
                 if (userName == activePlayer) {
@@ -275,22 +290,29 @@
 
                     /* grays out values for inactive player */
                     if (whichDiv == 'pointvalue') {
-                        document.getElementById("button10").disabled = true; document.getElementById("button10").style.backgroundColor = 'gray';
-                        document.getElementById("button20").disabled = true; document.getElementById("button20").style.backgroundColor = 'gray';
-                        document.getElementById("button30").disabled = true; document.getElementById("button30").style.backgroundColor = 'gray';
-                        document.getElementById("button40").disabled = true; document.getElementById("button40").style.backgroundColor = 'gray';
-                        document.getElementById("button50").disabled = true; document.getElementById("button50").style.backgroundColor = 'gray';
+                        myList = ["button10", "button20", "button30", "button40", "button50"];
+                        disableEnable(myList, 'disable');
                     }
 
                     /* grays out question choices for inactive player */
                     if (whichDiv == 'pointvalue') {
-                        document.getElementById("buttona").disabled = true; document.getElementById("buttona").style.backgroundColor = 'gray';
-                        document.getElementById("buttonb").disabled = true; document.getElementById("buttonb").style.backgroundColor = 'gray';
-                        document.getElementById("buttonc").disabled = true; document.getElementById("buttonc").style.backgroundColor = 'gray';
-                        document.getElementById("buttond").disabled = true; document.getElementById("buttond").style.backgroundColor = 'gray';
+                        myList = ["buttona", "buttonb", "buttonc", "buttond"]
+                        disableEnable(myList, 'disable');
                     }
                     document.getElementById(whichDiv + '_inactivediv').style.display = 'block';
                     document.getElementById(whichDiv + '_activediv').style.display = 'none';
+                }
+            }
+
+            /* this function turns buttons on and off */
+            function disableEnable (theList, status) {
+                var arrayLength = theList.length;
+                for (var i = 0; i < arrayLength; i++) {
+                    if (status == 'disable') {
+                        document.getElementById(theList[i]).disabled = true;    document.getElementById(theList[i]).style.backgroundColor = 'gray';    document.getElementById(theList[i]).style.cursor = 'not-allowed';
+                    } else {
+                        document.getElementById(theList[i]).disabled = false;    document.getElementById(theList[i]).style.backgroundColor = 'yellow';    document.getElementById(theList[i]).style.cursor = 'default';
+                    }
                 }
             }
     
