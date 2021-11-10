@@ -108,7 +108,6 @@ def generate_game(request):
             client.set("num_questions", num_questions)
             room_list.append(room_name)
             __encode_pickle("games",room_list)
-
             return HttpResponseRedirect(f"/{room_name}/{player_name}/")
 
 def get_remaining_questions(request):

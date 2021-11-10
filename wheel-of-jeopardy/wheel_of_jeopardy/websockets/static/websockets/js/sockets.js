@@ -12,7 +12,13 @@ fetch('/api/remaining')
 var table = document.querySelector("#connected-players-table");
 const roomName = JSON.parse(document.getElementById('game-room').textContent);
 const userName = JSON.parse(document.getElementById('user-name').textContent);
+let userList = null;
 let activePlayer = null;
+let category = null;
+let question = null;
+let choices = null;
+let questionPoint = null;
+
 const chatSocket = new WebSocket(
     'ws://'
     + window.location.host
@@ -29,6 +35,11 @@ chatSocket.onopen = function(e){
     }));
 }
 
+/*
+=============================================
+Process events coming from the socket
+=============================================
+*/
 chatSocket.onmessage = function(e) {
     let data = JSON.parse(e.data);
     data = data.payload;
@@ -38,7 +49,8 @@ chatSocket.onmessage = function(e) {
             fetch('/api/table')
             .then((resp) => resp.json())
             .then(function(resp_data) {
-                table_data = JSON.parse(resp_data);
+                let table_data = JSON.parse(resp_data);
+                userList = table_data;
                 console.log(`Recieved Data Joining:${resp_data}`);
                 chat_log.value += (data.message + '\n');
                 console.log(table_data)
@@ -70,8 +82,11 @@ chatSocket.onmessage = function(e) {
             break;
         
         case 'SPIN':
-            turnOn(data.element);
+           
+            turnOn(category);
             break;
+        case 'CHOOSE':
+
         // case "UPDATE_TABLE":
         //     generateTable(table, data.connected_users);
         //     generateTableHead(table, data.connected_users[0])
@@ -83,16 +98,27 @@ chatSocket.onclose = function(e) {
     console.error('Chat socket closed unexpectedly');
 };
 
+/*
+=============================================
+Functions to handle user events
+=============================================
+*/
 document.querySelector('#chat-message-input').onkeyup = function(e) {
     if (e.keyCode === 13) {  // enter, return
         document.querySelector('#chat-message-submit').click();
     }
 };
 
-document.querySelector('#spin-button').onclick = function(e) {
+document.querySelector('#spin-button').onclick = function(e) { 
+    fetch('api/category')
+    .then((response) => response.json())
+    .then(function(data) {
+        category = data.category;
+    });
     chatSocket.send(JSON.stringify({
         'event': 'SPIN',
-        'element': 'buzzer'
+        'element': 'buzzer',
+        'category': category
     }));
 }
 
