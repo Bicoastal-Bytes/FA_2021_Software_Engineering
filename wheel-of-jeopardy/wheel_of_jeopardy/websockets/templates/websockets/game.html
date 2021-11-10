@@ -104,10 +104,12 @@
                 <div id="buzzer_activediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel"></div>
                 <div id="buzzer_inactivediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel"></div>
                 <div class="flex">
-                    <div class="mx-auto">                       
+                    <div class="mx-auto">   
+                        
+                    <div id="buzzercategory" class="bg-aqua text-black py-4 px-4 rounded text-xl mt-10 px-20 outline-bk w-full text-center"></div>                    
                         <div class="bg-yellow-300 text-black py-4 px-4 rounded text-sm mt-2 px-20 outline-bk w-full text-center">
-                            <p>What animal dances to get a potential mate's attention?</p>
-                            <p>a. Elephants b. Monkies c. Birds d. Giraffes</p>
+                            <div id="buzzerquestion"></div>
+                            <div id="buzzeranswers"></div>
                             <p class="mt-2">&darr; Hit the buzzer to answer &darr; </p>
                         </div>
                     </div>
@@ -254,6 +256,10 @@
                 
                 if (whichDiv == 'wheel') {
                     setUpWheel();
+                } else if (whichDiv == 'buzzer') {
+                    document.getElementById('buzzercategory').innerHTML = category;
+                    document.getElementById('buzzerquestion').innerHTML = question;
+                    document.getElementById('buzzeranswers').innerHTML = choices;
                 }
                 
                 if (userName == activePlayer) {
