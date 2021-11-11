@@ -85,13 +85,13 @@
                     <div class="flex">                        
                         <div class="w-1/4"></div>
                         <div class="mx-auto">
-                            <button id="button10" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">10</button><br>
-                            <button id="button30" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">30</button><br>
-                            <button id="button50" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">50</button>
+                            <button id="button10" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer'); sendPoints(10);">10</button><br>
+                            <button id="button30" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer'); sendPoints(30);">30</button><br>
+                            <button id="button50" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer'); sendPoints(50);">50</button>
                         </div>
                         <div class="mx-auto">
-                            <button id="button20" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">20</button><br>
-                            <button id="button40" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer');">40</button><br> 
+                            <button id="button20" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer'); sendPoints(20);">20</button><br>
+                            <button id="button40" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer'); sendPoints(40);">40</button><br> 
                             
                         </div>
                         <div class="w-1/4"></div>
@@ -110,7 +110,7 @@
                         <div class="bg-yellow-300 text-black py-4 px-4 rounded text-sm mt-2 px-20 outline-bk w-full text-center">
                             <div id="buzzerquestion"></div>
                             <div id="buzzeranswers"></div>
-                            <p class="mt-2">&darr; Hit the buzzer to answer &darr; </p>
+                            <p class="mt-2">&darr; Hit the buzzer to answer &darr; <span id="time">05</span> seconds left</p>
                         </div>
                     </div>
                 </div>
@@ -152,31 +152,32 @@
 
             <div id="result">
                 <div id="result_activediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">You answered the question (in)correctly.</div>
-                <div id="result_inactivediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">Active answered the question (in)correctly.</div>              
+                <div id="result_inactivediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">Active answered the question (in)correctly.</div>
+                <div id="resultcorrectanswer" class="text-center text-yellow-300 m-8 text-2xl font-cinzel"></div>              
 
                 <div class="flex">
                     <div class="w-1/6"></div>
                     <div class="mx-auto w-1/6 m-4">
                         <div class="bg-blue-300 outline-bk text-center text-white font-extrabold py-4 text-2xl">
-                            600
-                            <div id="player1" class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-gloria text-5xl">
-                                Bob
+                            60
+                            <div id="player1" class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-gloria text-4xl">
+                                Laurie
                             </div>
                         </div>
                     </div>
                     <div class="mx-auto w-1/6 m-4">
                         <div class="bg-blue-300 outline-bk text-center text-white font-extrabold py-4 text-2xl">
-                            200
-                            <div id="player2" class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-parisienne text-5xl">
-                                Jeff
+                            20
+                            <div id="player2" class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-parisienne text-4xl">
+                                Clayton
                             </div>
                         </div>
                     </div>
                     <div class="mx-auto w-1/6 m-4">
                         <div id="player3" class="bg-blue-300 outline-bk text-center text-white font-extrabold py-4 text-2xl">
-                            1000
-                            <div class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-lakki text-5xl">
-                                Alice
+                            100
+                            <div class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-lakki text-4xl">
+                                Jordan
                             </div>
                         </div>
                     </div>
@@ -272,10 +273,14 @@
                         document.getElementById('spinthewheel').style.display = 'none';
                     }
                 } else if (whichDiv == 'buzzer') {
-                    /* populates the question on both buzzer and answer pages */
+                    /* populates the question on both buzzer, answer pages and result page */
                     document.getElementById('buzzercategory').innerHTML = category;     document.getElementById('answercategory').innerHTML = category;
                     document.getElementById('buzzerquestion').innerHTML = question;     document.getElementById('answerquestion').innerHTML = question;
                     document.getElementById('buzzeranswers').innerHTML = choices;       document.getElementById('answeranswers').innerHTML = choices;
+                    document.getElementById('resultcorrectanswer').innerHTML = 'The correct answer was - put correct answer here.';
+                    /* puts 5 second countdown timer on buzzer screen */
+                    display = document.querySelector('#time');
+                    startTimer(5, display);
                 }
                 
                 if (userName == activePlayer) {
@@ -323,13 +328,31 @@
     
                 setTimeout(() => {
                     turnOn('answer');
-                }, 5000);                 
+                }, 7000);                 
             }
     
             function stopBuzzer () {
                     elapsedTime = Math.floor((Date.now() - buzzerStart));
                     console.log(elapsedTime);
                     /* turnOn('answer'); */ /* i have a bug here where if you press this it still forwards in 5 seconds */
+            }
+
+            function sendPoints (pointsValue) {
+                fetch(`api/question?category=${category}&points=${pointValue}`)
+                .then((resp) => resp.json())
+                .then(function(data) {
+                    question = data.question,
+                    questionID = data.question_id,
+                    choices = data.choices,
+                    choicesID = data.choices_id,
+                    correctAnswer = 'do not know yet' //data.correct_answer
+                chatSocket.send(JSON.stringify({
+                    'event': "CHOOSE",
+                    'question': question,
+                    'choices': choices,
+                    'correct_answer': 'do not know yet' //correctAnswer
+                    }));
+                });
             }
         </script>
         <script type="text/javascript" src="https://bicoastal-bytes.github.io/FA_2021_Software_Engineering/images/Winwheel.js"></script>
@@ -399,6 +422,27 @@ function drawTriangle()
     ctx.stroke();                 // Complete the path by stroking (draw lines).
     ctx.fill();                   // Then fill.
 }
+
+
+/* countdown timer for the buzzer screen */
+
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+
         </script>
     </body>
 </html>
