@@ -80,13 +80,28 @@ class ChatConsumer(AsyncWebsocketConsumer):
             )
         
         if event == 'SPIN':
-            element = text_data_json['element']
+            category = text_data_json['category']
+            id = text_data_json['id']
+            spin = 0
+            if id == '0':
+                spin = 1
+            if id == '1':
+                spin = 61
+            if id == '2':
+                spin = 121
+            if id == '3':
+                spin = 181
+            if id == '4':
+                spin = 241
+            if id == '5':
+                spin = 301
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
                     'type': 'chat_message',
                     'event': 'SPIN',
-                    'element': element
+                    'category': category,
+                    'id': spin
                 }
             )
         # if event == 'UPDATE_TABLE':
