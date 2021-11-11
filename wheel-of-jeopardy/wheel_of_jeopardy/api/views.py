@@ -1,3 +1,4 @@
+from warnings import catch_warnings
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseNotAllowed
@@ -10,6 +11,7 @@ from websockets.tracking import UserTracker
 import pickle
 import redis
 import json
+import base64
 
 logger = logging.getLogger(__name__)
 
@@ -19,20 +21,9 @@ user_list = UserTracker()
 
 room_list = []
 
+category_list = []
+
 # Create your views here.
-def get_category(request):
-    """Get a random category when called"""
-    if request.method == "GET":
-        logger.debug('Recieved a GET request for a category')
-        categories = list(Category.objects.all())
-        logger.debug('Getting all categories from database')
-        random_categories = random.sample(categories, 1)
-        logger.debug('Choosing a random category')
-        random_category = random.choice(random_categories)
-        logger.debug('Sending category back to user')
-        return JsonResponse({'category': random_category.name})
-    else:
-        return HttpResponseNotAllowed(['GET'])
 
 def get_question(request):
     """Get a question from a specific category and point value"""
@@ -47,7 +38,8 @@ def get_question(request):
             "question": question[0].question,
             "question_id": question[0].id,
             "choices": choices[0].choices,
-            "choices_id": choices[0].id
+            "choices_id": choices[0].id,
+            "correct_answer": str(base64.b64encode(choices[0].correct_answer.encode('utf-8')), "utf-8")
         }
         logger.debug('Sending data back to client')
         remaining_questions = client.get("num_questions")
@@ -108,6 +100,13 @@ def generate_game(request):
             client.set("num_questions", num_questions)
             room_list.append(room_name)
             __encode_pickle("games",room_list)
+            logger.debug('Recieved a GET request for a category')
+            categories = list(Category.objects.all())
+            logger.debug('Getting all categories from database')
+            random_cats = random.sample(categories, 6)
+            category_list.extend(random_cats)
+            logger.debug(category_list)
+            logger.debug('Choosing a random category')
             return HttpResponseRedirect(f"/{room_name}/{player_name}/")
 
 def get_remaining_questions(request):
@@ -118,6 +117,31 @@ def get_active_player(request):
     player_name = user_list.get_active_player()
     logger.debug('Active Player Name' + player_name)
     return JsonResponse({'player': player_name})
+
+def get_category(request):
+    """Get a random category when called"""
+    if request.method == "GET":
+        random_category = random.choice(category_list)
+        id = category_list.index(random_category)
+        response_data = {
+           'category': random_category.name,
+           'id': id 
+        }
+        return JsonResponse(response_data)
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
+def populate_wheel(request):
+    if request.method == "GET":
+        categories = []
+        for cat in category_list:
+            data = {
+                'name': cat.name,
+                'id': category_list.index(cat)
+            }
+            categories.append(data)
+        return JsonResponse(categories, safe=False)
+
 
 
 def __decode_pickle(key):
