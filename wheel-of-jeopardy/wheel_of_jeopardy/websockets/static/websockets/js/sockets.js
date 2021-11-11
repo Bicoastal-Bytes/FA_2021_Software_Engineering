@@ -18,6 +18,7 @@ let category = null;
 let question = null;
 let choices = null;
 let questionPoint = null;
+let correctAnswer = null;
 
 const chatSocket = new WebSocket(
     'ws://'
@@ -82,15 +83,14 @@ chatSocket.onmessage = function(e) {
             break;
         
         case 'SPIN':
-           
-            turnOn(category);
+            category = data.category
+            calculatePrize(data.id)
             break;
         case 'CHOOSE':
-
-        // case "UPDATE_TABLE":
-        //     generateTable(table, data.connected_users);
-        //     generateTableHead(table, data.connected_users[0])
-        //     break;
+            question = data.question;
+            choices = data.choices;
+            correctAnswer = data.correct_answer;
+            break;
     }
 };
 
@@ -109,16 +109,18 @@ document.querySelector('#chat-message-input').onkeyup = function(e) {
     }
 };
 
-document.querySelector('#spin-button').onclick = function(e) { 
-    fetch('api/category')
+document.querySelector('#spinthewheel').onclick = function(e) { 
+    let id = 0;
+    fetch('/api/category')
     .then((response) => response.json())
     .then(function(data) {
         category = data.category;
+        id = data.id
     });
     chatSocket.send(JSON.stringify({
         'event': 'SPIN',
-        'element': 'buzzer',
-        'category': category
+        'category': category,
+        'id': id
     }));
 }
 
