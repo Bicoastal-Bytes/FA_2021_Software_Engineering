@@ -159,7 +159,7 @@
                     <div class="mx-auto w-1/6 m-4">
                         <div class="bg-blue-300 outline-bk text-center text-white font-extrabold py-4 text-2xl">
                             600
-                            <div class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-gloria text-5xl">
+                            <div id="player1" class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-gloria text-5xl">
                                 Bob
                             </div>
                         </div>
@@ -167,13 +167,13 @@
                     <div class="mx-auto w-1/6 m-4">
                         <div class="bg-blue-300 outline-bk text-center text-white font-extrabold py-4 text-2xl">
                             200
-                            <div class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-parisienne text-5xl">
+                            <div id="player2" class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-parisienne text-5xl">
                                 Jeff
                             </div>
                         </div>
                     </div>
                     <div class="mx-auto w-1/6 m-4">
-                        <div class="bg-blue-300 outline-bk text-center text-white font-extrabold py-4 text-2xl">
+                        <div id="player3" class="bg-blue-300 outline-bk text-center text-white font-extrabold py-4 text-2xl">
                             1000
                             <div class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-lakki text-5xl">
                                 Alice
@@ -238,7 +238,11 @@
         
         <script language='javascript' type='text/javascript'>
             var buzzerStart = 0; 
-            var elapsedTime = 0;
+            var elapsedTime = 0;   
+
+          
+            console.log('userlist: ' );
+             
     
             function turnOff () {
                 const pageNames = [ {x:'status'}, {x:'wheel'}, {x:'pointvalue'}, {x:'buzzer'}, {x:'answer'}, {x:'result'}, {x:'gameresult'}];
@@ -263,18 +267,15 @@
                     disableEnable(myList, 'enable');
                     myList = ["buttona", "buttonb", "buttonc", "buttond"]
                     disableEnable(myList, 'enable');
-                    /* hide spin the wheel button if inactive */
+                    /* hide spin the wheel button if inactive player */
                     if (userName != activePlayer){
                         document.getElementById('spinthewheel').style.display = 'none';
                     }
                 } else if (whichDiv == 'buzzer') {
-                    document.getElementById('buzzercategory').innerHTML = category;
-                    document.getElementById('buzzerquestion').innerHTML = question;
-                    document.getElementById('buzzeranswers').innerHTML = choices;
-                } else if (whichDiv == 'answer') {
-                    document.getElementById('answercategory').innerHTML = category;
-                    document.getElementById('answerquestion').innerHTML = question;
-                    document.getElementById('answeranswers').innerHTML = choices;
+                    /* populates the question on both buzzer and answer pages */
+                    document.getElementById('buzzercategory').innerHTML = category;     document.getElementById('answercategory').innerHTML = category;
+                    document.getElementById('buzzerquestion').innerHTML = question;     document.getElementById('answerquestion').innerHTML = question;
+                    document.getElementById('buzzeranswers').innerHTML = choices;       document.getElementById('answeranswers').innerHTML = choices;
                 }
                 
                 if (userName == activePlayer) {
@@ -311,7 +312,7 @@
                     if (status == 'disable') {
                         document.getElementById(theList[i]).disabled = true;    document.getElementById(theList[i]).style.backgroundColor = 'gray';    document.getElementById(theList[i]).style.cursor = 'not-allowed';
                     } else {
-                        document.getElementById(theList[i]).disabled = false;    document.getElementById(theList[i]).style.backgroundColor = 'yellow';    document.getElementById(theList[i]).style.cursor = 'default';
+                        document.getElementById(theList[i]).disabled = false;    document.getElementById(theList[i]).style.backgroundColor = 'yellow';    document.getElementById(theList[i]).style.cursor = 'pointer';
                     }
                 }
             }
