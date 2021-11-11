@@ -14,4 +14,5 @@ urlpatterns = [
     path('generate', views.generate_game, name="generate_game"),
     path('remaining', views.get_remaining_questions, name="get_remaining_questions"),
     path('active', views.get_active_player, name="get_active_player"),
+    path('wheel', views.populate_wheel, name='populate_wheel' )
 ]
