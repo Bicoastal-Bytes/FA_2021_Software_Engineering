@@ -76,7 +76,7 @@
                         </div>                 
                     </div>
                 </div>
-                <button onclick="turnOn('pointvalue');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">switch</button>
+                <a onclick="turnOn('pointvalue');" class="text-blue-400">switch</a>
             </div>
 
             <div id="pointvalue">
@@ -96,7 +96,6 @@
                         </div>
                         <div class="w-1/4"></div>
                     </div>
-                    <button onclick="startBuzzer(); turnOn('buzzer');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">switch</button>
                 </div>
                 
 
@@ -147,7 +146,6 @@
                     </div>
                     <div class="w-1/4"></div>
                 </div>
-                <button onclick="turnOn('result');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">switch</button>
             </div>
 
             <div id="result">
@@ -242,7 +240,7 @@
             var elapsedTime = 0;   
 
           
-            console.log('userlist: ' );
+            console.log('userlist: ' +  JSON.stringify(userList));
              
     
             function turnOff () {
@@ -261,8 +259,6 @@
                 document.getElementById(whichDiv).style.display = 'block';
                 
                 if (whichDiv == 'wheel') {
-                    /* initialize the wheel each turn */
-                    setUpWheel();
                     /* reset turned off divs for next turn */
                     myList = ["button10", "button20", "button30", "button40", "button50"];
                     disableEnable(myList, 'enable');
@@ -273,14 +269,23 @@
                         document.getElementById('spinthewheel').style.display = 'none';
                     }
                 } else if (whichDiv == 'buzzer') {
+                    /* parse the answers */                    
+                    var mystring = JSON.stringify(choices);                    
+                    var newmystring = mystring.replace('[', '').replace(']', '').replace(/"/g, '');
+                    var splits = newmystring.split(",");
+                    console.log(splits[0], splits[1], splits[2], splits[3])
+
                     /* populates the question on both buzzer, answer pages and result page */
                     document.getElementById('buzzercategory').innerHTML = category;     document.getElementById('answercategory').innerHTML = category;
                     document.getElementById('buzzerquestion').innerHTML = question;     document.getElementById('answerquestion').innerHTML = question;
-                    document.getElementById('buzzeranswers').innerHTML = choices;       document.getElementById('answeranswers').innerHTML = choices;
-                    document.getElementById('resultcorrectanswer').innerHTML = 'The correct answer was - put correct answer here.';
+                    document.getElementById('buzzeranswers').innerHTML = 'A. ' + splits[0] + ' B. ' + splits[1] + ' C. ' + splits[2] + ' D. ' + splits[3];       
+                    document.getElementById('answeranswers').innerHTML = 'A. ' + splits[0] + ' B. ' + splits[1] + ' C. ' + splits[2] + ' D. ' + splits[3];  
+                    document.getElementById('resultcorrectanswer').innerHTML = 'The correct answer was - ' + atob(correctAnswer);
                     /* puts 5 second countdown timer on buzzer screen */
                     display = document.querySelector('#time');
                     startTimer(5, display);
+                } else if (whichDiv == 'answer') {
+                    console.log(correctAnswer);
                 }
                 
                 if (userName == activePlayer) {
@@ -361,7 +366,8 @@
          
          let theWheel;
 
-         function setUpWheel () {
+         function setUpWheel () {  
+
             theWheel = new Winwheel({
             'numSegments'  : 6,     // Specify number of segments.
             'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
@@ -390,8 +396,11 @@
 
         // Function with formula to work out stopAngle before spinning animation.
         // Called from Click of the Spin button.
-        function calculatePrize(angle)
-        {
+        function calculatePrize(angle, cats = null)
+        {           
+            /* initialize the wheel each turn */
+            setUpWheel();
+            
             // This formula always makes the wheel stop somewhere inside prize 3 at least
             // 1 degree away from the start and end edges of the segment.
             let stopAt = (angle + Math.floor((Math.random() * 58)))
@@ -401,6 +410,11 @@
 
             // May as well start the spin from here.
             theWheel.startAnimation();
+
+            // forward to the point value page after wheel has spun
+            setTimeout(() => {
+                    turnOn('pointvalue');
+                }, 7000);   
         }
 
         // Usual pointer drawing code.
