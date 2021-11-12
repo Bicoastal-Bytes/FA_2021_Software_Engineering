@@ -83,13 +83,14 @@ chatSocket.onmessage = function(e) {
             break;
         
         case 'SPIN':
-            category = data.category
-            calculatePrize(data.id)
+            category = data.category;
+            calculatePrize(data.id);
             break;
         case 'CHOOSE':
             question = data.question;
             choices = data.choices;
             correctAnswer = data.correct_answer;
+            turnOn('buzzer');
             break;
     }
 };
