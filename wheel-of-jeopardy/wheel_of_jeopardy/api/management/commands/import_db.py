@@ -41,7 +41,7 @@ class Command(BaseCommand):
                     if entry['difficulty'] == 'medium':
                         point_value = random.randrange(300, 401, 100)
                     if entry['difficulty'] == 'hard':
-                        point_value = random.randrange(500, 601, 100)
+                        point_value = 500 
                     # Getting the category object
                     cat = Category.objects.filter(name=entry['category'])
                     # Create a question object
