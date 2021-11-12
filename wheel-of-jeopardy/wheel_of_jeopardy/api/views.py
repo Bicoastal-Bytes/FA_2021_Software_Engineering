@@ -34,6 +34,7 @@ def get_question(request):
         logger.debug('Communicating with database to get question')
         choices = list(Choices.objects.filter(question_id=question[0].id))
         logger.debug('Communicating with database to get choices for question')
+        random.shuffle(choices[0].choices)
         response_data = {
             "question": question[0].question,
             "question_id": question[0].id,
@@ -42,7 +43,7 @@ def get_question(request):
             "correct_answer": str(base64.b64encode(choices[0].correct_answer.encode('utf-8')), "utf-8")
         }
         logger.debug('Sending data back to client')
-        remaining_questions = client.get("num_questions")
+        remaining_questions = int(client.get("num_questions"))
         remaining_questions -= 1
         client.set("num_questions", remaining_questions)
         return JsonResponse(response_data)
