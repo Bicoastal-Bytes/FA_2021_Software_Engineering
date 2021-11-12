@@ -85,13 +85,13 @@
                     <div class="flex">                        
                         <div class="w-1/4"></div>
                         <div class="mx-auto">
-                            <button id="button10" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer'); sendPoints(10);">10</button><br>
-                            <button id="button30" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer'); sendPoints(30);">30</button><br>
-                            <button id="button50" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer'); sendPoints(50);">50</button>
+                            <button id="button10" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="sendPoints(100); startBuzzer(); turnOn('buzzer');">10</button><br>
+                            <button id="button30" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer'); sendPoints(300);">30</button><br>
+                            <button id="button50" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer'); sendPoints(500);">50</button>
                         </div>
                         <div class="mx-auto">
-                            <button id="button20" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer'); sendPoints(20);">20</button><br>
-                            <button id="button40" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer'); sendPoints(40);">40</button><br> 
+                            <button id="button20" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer'); sendPoints(200);">20</button><br>
+                            <button id="button40" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); turnOn('buzzer'); sendPoints(400);">40</button><br> 
                             
                         </div>
                         <div class="w-1/4"></div>
@@ -241,8 +241,6 @@
             var buzzerStart = 0; 
             var elapsedTime = 0;   
 
-          
-            console.log('userlist: ' );
              
     
             function turnOff () {
@@ -337,7 +335,7 @@
                     /* turnOn('answer'); */ /* i have a bug here where if you press this it still forwards in 5 seconds */
             }
 
-            function sendPoints (pointsValue) {
+            function sendPoints (pointValue) {
                 fetch(`/api/question?category=${category}&points=${pointValue}`)
                 .then((resp) => resp.json())
                 .then(function(data) {
@@ -345,12 +343,12 @@
                     questionID = data.question_id,
                     choices = data.choices,
                     choicesID = data.choices_id,
-                    correctAnswer = 'do not know yet' //data.correct_answer
+                    correctAnswer = data.correct_answer
                 chatSocket.send(JSON.stringify({
                     'event': "CHOOSE",
                     'question': question,
                     'choices': choices,
-                    'correct_answer': 'do not know yet' //correctAnswer
+                    'correct_answer': correctAnswer
                     }));
                 });
             }
