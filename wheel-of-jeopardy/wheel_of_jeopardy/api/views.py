@@ -65,7 +65,7 @@ def register_user(request):
 def unregister_user(request):
     if request.method == 'POST':
         player_data = json.loads(request.body)
-        user_list.remove_user(player_data)
+        user_list.remove_user(player_data['player'])
         client.set('user_list', pickle.dumps(user_list))
         logger.debug(f'{player_data["player"]} has left the game' )
         return HttpResponseRedirect('/')
