@@ -15,7 +15,8 @@ class UserTracker():
         """Function to add a user's name and increment the user count"""
         player = {
             "player": user ,
-            "active": False
+            "active": False,
+            "score": 0
         }
         self.users.append(player)
         self.user_index = dict((p['player'], i) for i,p  in enumerate(self.users))
@@ -27,7 +28,8 @@ class UserTracker():
 
     def remove_user(self, user):
         """Function to remove a user's name and decrement the user count"""
-        self.users.remove(user)
+        player_index = self.user_index.get(user)
+        self.users.pop(player_index)
         self.num_users -= 1
     
     def get_connected_users(self):
@@ -47,3 +49,7 @@ class UserTracker():
     def get_active_player(self):
         active = next(filter(lambda d: d.get("active") == True, self.users), None)
         return active['player']
+    
+    def get_player_score(self, player):
+        score = next(filter(lambda d: d.get('player') == player, self.users), None)
+        return score['score'] 

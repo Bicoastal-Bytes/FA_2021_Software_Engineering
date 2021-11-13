@@ -15,6 +15,7 @@ class RegisterForm(forms.Form):
 class CreationForm(forms.Form):
     """Form to choose how many players """
     CHOICES = [
+        ('2', 2),
         ('6', 6),
         ('12', 12),
         ('18', 18),

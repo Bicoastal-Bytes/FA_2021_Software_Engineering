@@ -262,8 +262,12 @@
                 if (choice != null) {
                     var correctMessage = (splits[choice] == atob(correctAnswer)) ? 'correctly' :'incorrectly';
                     var whoMessage = (activePlayer = userName) ? 'You' : activePlayer;
-                    
-                   document.getElementById('result_result').innerHTML = whoMessage + ' answered the question ' + correctMessage + '.';
+                    let message = `${whoMessage}' answered the question ${correctMessage}.`;
+                    chatSocket.send(JSON.stringify({
+                        'event': 'ANSWER',
+                        'message': message,
+                        'userChoice': choice
+                    }));
                 }
                 
                 turnOff(); 
