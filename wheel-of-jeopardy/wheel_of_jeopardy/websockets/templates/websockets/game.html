@@ -8,9 +8,9 @@
         <title>Wheel of Jeopardy - Welcome</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="https://bicoastal-bytes.github.io/FA_2021_Software_Engineering/styles.css" rel="stylesheet">
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="https://bicoastal-bytes.github.io/FA_2021_Software_Engineering/favicon.ico">
     </head>
-    <body class="bg-blue-400 text-gray-700" onload="turnOn('status');">
+    <body class="bg-blue-400 text-gray-700" onload="turnOn('status'); setUpWheel();">
         <div class="container mx-auto">
 
             <header class="bg-blue-900">
@@ -31,6 +31,7 @@
                 </div>
             </header>
 
+            <!--
             <div class="m-10">
             <div class="flex justify-between mt-10">
                 <div id="timer">
@@ -40,6 +41,7 @@
                     Scoreboard Area
                 </div>
             </div>
+            -->
             <!-- ********************************************** -->
             <!--                 Content Area                   -->
             <!-- ********************************************** -->
@@ -119,6 +121,8 @@
                         <img src="https://bicoastal-bytes.github.io/FA_2021_Software_Engineering/images/buzzer.png" alt="buzzer" onclick="stopBuzzer();">
                     </div>
                 </div>
+                <a onclick="turnOn('answer');" class="text-blue-400">switch</a>
+
             </div>
 
             <div id="answer">
@@ -137,20 +141,21 @@
                 <div class="flex">
                     <div class="w-1/4"></div>
                     <div class="mx-auto">
-                        <button id="buttona" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="turnOn('result');">A</button><br>
-                        <button id="buttonb" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="turnOn('result');">B</button>
+                        <button id="buttona" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="turnOn('result', 0);">A</button><br>
+                        <button id="buttonb" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="turnOn('result', 1);">B</button>
                     </div>
                     <div class="mx-auto">
-                        <button id="buttonc" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="turnOn('result');">C</button><br>
-                         <button id="buttond" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="turnOn('result');">D</button>
+                        <button id="buttonc" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="turnOn('result', 2);">C</button><br>
+                         <button id="buttond" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="turnOn('result', 3);">D</button>
                     </div>
                     <div class="w-1/4"></div>
                 </div>
+                <a onclick="turnOn('result');" class="text-blue-400">switch</a>
             </div>
 
             <div id="result">
-                <div id="result_activediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">You answered the question (in)correctly.</div>
-                <div id="result_inactivediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">Active answered the question (in)correctly.</div>
+                <div id="result_result" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">You answered the question (in)correctly.</div>
+                <div class="hidden"><div id="result_activediv"></div><div id="result_inactivediv"></div></div>
                 <div id="resultcorrectanswer" class="text-center text-yellow-300 m-8 text-2xl font-cinzel"></div>              
 
                 <div class="flex">
@@ -181,7 +186,7 @@
                     </div>
                     <div class="w-1/6"></div>
                 </div>
-                <button onclick="turnOn('wheel');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">switch</button>
+                <button onclick="turnOn('wheel');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">next question</button>
 
             </div>
 
@@ -238,10 +243,9 @@
         <script language='javascript' type='text/javascript'>
             var buzzerStart = 0; 
             var elapsedTime = 0;   
+            var splits = null;
+            var splitschoice = 0;
 
-          
-            console.log('userlist: ' +  JSON.stringify(userList));
-             
     
             function turnOff () {
                 const pageNames = [ {x:'status'}, {x:'wheel'}, {x:'pointvalue'}, {x:'buzzer'}, {x:'answer'}, {x:'result'}, {x:'gameresult'}];
@@ -250,10 +254,17 @@
                 });
             }
     
-            function turnOn (whichDiv) {
+            function turnOn (whichDiv, choice = null) {
                 var original;
                 var result;
-                var myList
+                var myList;
+
+                if (choice != null) {
+                    var correctMessage = (splits[choice] == atob(correctAnswer)) ? 'correctly' :'incorrectly';
+                    var whoMessage = (activePlayer = userName) ? 'You' : activePlayer;
+                    
+                   document.getElementById('result_result').innerHTML = whoMessage + ' answered the question ' + correctMessage + '.';
+                }
                 
                 turnOff(); 
                 document.getElementById(whichDiv).style.display = 'block';
@@ -272,8 +283,7 @@
                     /* parse the answers */                    
                     var mystring = JSON.stringify(choices);                    
                     var newmystring = mystring.replace('[', '').replace(']', '').replace(/"/g, '');
-                    var splits = newmystring.split(",");
-                    console.log(splits[0], splits[1], splits[2], splits[3])
+                    splits = newmystring.split(",");
 
                     /* populates the question on both buzzer, answer pages and result page */
                     document.getElementById('buzzercategory').innerHTML = category;     document.getElementById('answercategory').innerHTML = category;
@@ -284,9 +294,7 @@
                     /* puts 5 second countdown timer on buzzer screen */
                     display = document.querySelector('#time');
                     startTimer(5, display);
-                } else if (whichDiv == 'answer') {
-                    console.log(correctAnswer);
-                }
+                } 
                 
                 if (userName == activePlayer) {
                     document.getElementById(whichDiv + '_activediv').style.display = 'block';
@@ -400,7 +408,7 @@
         {           
             /* initialize the wheel each turn */
             setUpWheel();
-            
+
             // This formula always makes the wheel stop somewhere inside prize 3 at least
             // 1 degree away from the start and end edges of the segment.
             let stopAt = (angle + Math.floor((Math.random() * 58)))
