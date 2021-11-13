@@ -96,7 +96,7 @@ chatSocket.onmessage = function(e) {
         case 'ANSWER':
             document.getElementById('result_result').innerHTML = data.message;
             if (activePlayer != userName){
-                turnOn('nothing', data.user_choice);
+                turnOn('result', data.user_choice);
             }
             break;
     }

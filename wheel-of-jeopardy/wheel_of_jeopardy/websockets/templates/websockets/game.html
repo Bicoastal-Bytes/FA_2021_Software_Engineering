@@ -87,13 +87,13 @@
                     <div class="flex">                        
                         <div class="w-1/4"></div>
                         <div class="mx-auto">
-                            <button id="button10" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); sendPoints(100);">10</button><br>
-                            <button id="button30" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); sendPoints(300);">30</button><br>
-                            <button id="button50" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); sendPoints(500);">50</button>
+                            <button id="button10" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="sendPoints(100);">10</button><br>
+                            <button id="button30" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="sendPoints(300);">30</button><br>
+                            <button id="button50" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="sendPoints(500);">50</button>
                         </div>
                         <div class="mx-auto">
-                            <button id="button20" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); sendPoints(200);">20</button><br>
-                            <button id="button40" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); sendPoints(400);">40</button><br> 
+                            <button id="button20" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="sendPoints(200);">20</button><br>
+                            <button id="button40" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="sendPoints(400);">40</button><br> 
                             
                         </div>
                         <div class="w-1/4"></div>
@@ -155,7 +155,7 @@
 
             <div id="result">
                 <div id="result_result" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">You answered the question (in)correctly.</div>
-                <div class="hidden"><div id="result_activediv"></div><div id="result_inactivediv"></div></div>
+                <!--<div class="hidden"><div id="result_activediv"></div><div id="result_inactivediv"></div></div>-->
                 <div id="resultcorrectanswer" class="text-center text-yellow-300 m-8 text-2xl font-cinzel"></div>              
 
                 <div class="flex">
@@ -186,7 +186,8 @@
                     </div>
                     <div class="w-1/6"></div>
                 </div>
-                <button onclick="turnOn('wheel');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">next question</button>
+                <div id="whichbutton"><button onclick="turnOn('wheel');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">next question</button></div>
+                
 
             </div>
 
@@ -195,7 +196,7 @@
                 <div id="gameresult_inactivediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel"></div>
            
                 <div class="gameresult_inactiveplayermessage gameresult_activeplayerdiv"></div>
-                <p class="text-center text-yellow-300 m-16 text-2xl font-cinzel">game result</p>
+                <p class="text-center text-yellow-300 m-16 text-2xl font-cinzel">Laurie won the game with 30 points.</p>
             </div>
             </div>
             <!-- ********************************************** -->
@@ -259,6 +260,9 @@
                 var result;
                 var myList;
 
+                turnOff(); 
+                document.getElementById(whichDiv).style.display = 'block';
+
                 if (choice != null) {
                     var correctMessage = (splits[choice] == atob(correctAnswer)) ? 'correctly' :'incorrectly';
                     var whoMessage = (activePlayer = userName) ? 'You' : activePlayer;
@@ -268,10 +272,7 @@
                         'message': message,
                         'userChoice': choice
                     }));
-                }
-                
-                turnOff(); 
-                document.getElementById(whichDiv).style.display = 'block';
+                }                
                 
                 if (whichDiv == 'wheel') {
                     /* reset turned off divs for next turn */
@@ -298,6 +299,7 @@
                     /* puts 5 second countdown timer on buzzer screen */
                     display = document.querySelector('#time');
                     startTimer(5, display);
+                    startBuzzer();
                 } 
                 
                 if (userName == activePlayer) {
@@ -376,7 +378,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
         <script language='javascript' type='text/javascript'>
          
-         let theWheel;
+         let theWheel = null;
+         let numberOfWheels = 0;
 
          function setUpWheel () {  
 
@@ -386,11 +389,11 @@
             'textFontSize' : 28,    // Set font size as desired.
             'segments'     :        // Define segments including colour and text.
             [
-            {'fillStyle' : '#ffbdbd', 'text' : 'Animals'},
-            {'fillStyle' : '#89f26e', 'text' : 'History'},
+            {'fillStyle' : '#ffbdbd', 'text' : 'Computers'},
+            {'fillStyle' : '#89f26e', 'text' : 'Animals'},
             {'fillStyle' : '#7de6ef', 'text' : 'Literature'},
             {'fillStyle' : '#e7706f', 'text' : 'Philosophy'},
-            {'fillStyle' : '#eae56f', 'text' : 'Science'},
+            {'fillStyle' : '#eae56f', 'text' : 'History'},
             {'fillStyle' : '#b795fc', 'text' : 'Sports'}
             ],
             'animation' :
@@ -409,7 +412,12 @@
         // Function with formula to work out stopAngle before spinning animation.
         // Called from Click of the Spin button.
         function calculatePrize(angle, cats = null)
-        {           
+        {     
+            numberOfWheels++;      
+            if (numberOfWheels == 2) {
+                document.getElementById('whichbutton').innerHTML = document.getElementById('whichbutton').innerHTML.replace('next question', 'game result').replace('wheel', 'gameresult');
+            } 
+            //console.log('cats: ' + cats);
             /* initialize the wheel each turn */
             setUpWheel();
 
