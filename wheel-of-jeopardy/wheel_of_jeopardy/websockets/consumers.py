@@ -116,6 +116,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     'correct_answer': text_data_json['correct_answer']
                 }
             )
+        
+        if event == 'ANSWER':
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'chat_message',
+                    'event': 'ANSWER',
+                    'message': text_data_json['message'],
+                    'user_choice': text_data_json['userChoice']
+                }
+            )
         # if event == 'UPDATE_TABLE':
         #     users = self.userTrack.get_connected_users()
         #     await self.channel_layer.group_send(

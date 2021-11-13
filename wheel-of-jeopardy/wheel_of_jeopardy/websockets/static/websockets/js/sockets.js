@@ -92,6 +92,13 @@ chatSocket.onmessage = function(e) {
             correctAnswer = data.correct_answer;
             turnOn('buzzer');
             break;
+        
+        case 'ANSWER':
+            document.getElementById('result_result').innerHTML = data.message;
+            if (activePlayer != userName){
+                turnOn('nothing', data.user_choice);
+            }
+            break;
     }
 };
 
