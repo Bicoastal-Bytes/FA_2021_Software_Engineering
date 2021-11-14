@@ -84,8 +84,7 @@ chatSocket.onmessage = function(e) {
         
         case 'SPIN':
             category = data.category;
-
-            calculatePrize(data.id, data.categories);
+            calculatePrize(data.id);
             break;
         case 'CHOOSE':
             question = data.question;
@@ -125,18 +124,12 @@ document.querySelector('#spinthewheel').onclick = function(e) {
     .then(function(data) {
         category = data.category;
         id = data.id
-        fetch('/api/wheel')
-        .then((response) => response.json())
-        .then(function(data){
-            chatSocket.send(JSON.stringify({
-                'event': 'SPIN',
-                'category': category,
-                'id': id,
-                'categories': data.categories
-            }));
-        })  
     });
-    
+    chatSocket.send(JSON.stringify({
+        'event': 'SPIN',
+        'category': category,
+        'id': id
+    }));
 }
 
 document.querySelector('#chat-message-submit').onclick = function(e) {
