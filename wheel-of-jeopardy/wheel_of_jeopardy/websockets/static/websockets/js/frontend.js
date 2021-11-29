@@ -21,7 +21,7 @@ function turnOn (whichDiv, choice = null) {
 
     if (choice != null) {
         var correctMessage = (splits[choice] == atob(correctAnswer)) ? 'correctly' :'incorrectly';
-        var whoMessage = (activePlayer = userName) ? 'You' : activePlayer;
+        var whoMessage = (activePlayer == userName) ? 'You' : activePlayer;
         let message = `${whoMessage}' answered the question ${correctMessage}.`;
         chatSocket.send(JSON.stringify({
             'event': 'ANSWER',
