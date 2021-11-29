@@ -101,8 +101,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     'type': 'chat_message',
                     'event': 'SPIN',
                     'category': category,
-                    'id': spin,
-                    'categories': text_data_json['categories']
+                    'id': spin
                 }
             )
         
