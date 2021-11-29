@@ -141,7 +141,10 @@ def populate_wheel(request):
                 'id': category_list.index(cat)
             }
             categories.append(data)
-        return JsonResponse(categories, safe=False)
+        return_value = {
+            "categories": categories
+        }
+        return JsonResponse(return_value)
 
 
 
