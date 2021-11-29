@@ -87,13 +87,13 @@
                     <div class="flex">                        
                         <div class="w-1/4"></div>
                         <div class="mx-auto">
-                            <button id="button10" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); sendPoints(100);">10</button><br>
-                            <button id="button30" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); sendPoints(300);">30</button><br>
-                            <button id="button50" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); sendPoints(500);">50</button>
+                            <button id="button10" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="sendPoints(100);">10</button><br>
+                            <button id="button30" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="sendPoints(300);">30</button><br>
+                            <button id="button50" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="sendPoints(500);">50</button>
                         </div>
                         <div class="mx-auto">
-                            <button id="button20" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); sendPoints(200);">20</button><br>
-                            <button id="button40" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="startBuzzer(); sendPoints(400);">40</button><br> 
+                            <button id="button20" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="sendPoints(200);">20</button><br>
+                            <button id="button40" class="bg-yellow-300 hover:bg-yellow-400 text-black py-4 px-4 rounded text-sm m-2 px-20 outline-bk" onclick="sendPoints(400);">40</button><br> 
                             
                         </div>
                         <div class="w-1/4"></div>
@@ -155,7 +155,7 @@
 
             <div id="result">
                 <div id="result_result" class="text-center text-yellow-300 m-8 text-2xl font-cinzel">You answered the question (in)correctly.</div>
-                <div class="hidden"><div id="result_activediv"></div><div id="result_inactivediv"></div></div>
+                <!--<div class="hidden"><div id="result_activediv"></div><div id="result_inactivediv"></div></div>-->
                 <div id="resultcorrectanswer" class="text-center text-yellow-300 m-8 text-2xl font-cinzel"></div>              
 
                 <div class="flex">
@@ -186,7 +186,8 @@
                     </div>
                     <div class="w-1/6"></div>
                 </div>
-                <button onclick="turnOn('wheel');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">next question</button>
+                <div id="whichbutton"><button onclick="turnOn('wheel');" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">next question</button></div>
+                
 
             </div>
 
@@ -195,7 +196,7 @@
                 <div id="gameresult_inactivediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel"></div>
            
                 <div class="gameresult_inactiveplayermessage gameresult_activeplayerdiv"></div>
-                <p class="text-center text-yellow-300 m-16 text-2xl font-cinzel">game result</p>
+                <p class="text-center text-yellow-300 m-16 text-2xl font-cinzel">Laurie won the game with 30 points.</p>
             </div>
             </div>
             <!-- ********************************************** -->
@@ -228,9 +229,13 @@
             <!-- ********************************************** -->
             <!--               End Content Area                 -->
             <!-- ********************************************** -->
+
+
             <footer class="m-16">
                 <p class="text-center font-bold text-xs">Copyright © 2021 Bicoastal Bytes</p>
             </footer>
+            
+            <div id="debugging" class="border-2 p-10"></div>
         </div>
 
 
@@ -238,237 +243,11 @@
         <script src="{% static 'websockets/js/generate_table.js' %}"></script>
         <script src="{% static 'websockets/js/helper.js' %}"></script>
         <script src="{% static 'websockets/js/sockets.js' %}"></script>
+        <script src="{% static 'websockets/js/wheel.js' %}"></script>
+        <script src="{% static 'websockets/js/frontend.js' %}"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        
-        <script language='javascript' type='text/javascript'>
-            var buzzerStart = 0; 
-            var elapsedTime = 0;   
-            var splits = null;
-            var splitschoice = 0;
-
-    
-            function turnOff () {
-                const pageNames = [ {x:'status'}, {x:'wheel'}, {x:'pointvalue'}, {x:'buzzer'}, {x:'answer'}, {x:'result'}, {x:'gameresult'}];
-                pageNames.forEach((element) => {
-                    document.getElementById(element.x).style.display = 'none';
-                });
-            }
-    
-            function turnOn (whichDiv, choice = null) {
-                var original;
-                var result;
-                var myList;
-
-                if (choice != null) {
-                    var correctMessage = (splits[choice] == atob(correctAnswer)) ? 'correctly' :'incorrectly';
-                    var whoMessage = (activePlayer = userName) ? 'You' : activePlayer;
-                    let message = `${whoMessage}' answered the question ${correctMessage}.`;
-                    chatSocket.send(JSON.stringify({
-                        'event': 'ANSWER',
-                        'message': message,
-                        'userChoice': choice
-                    }));
-                }
-                
-                turnOff(); 
-                document.getElementById(whichDiv).style.display = 'block';
-                
-                if (whichDiv == 'wheel') {
-                    /* reset turned off divs for next turn */
-                    myList = ["button10", "button20", "button30", "button40", "button50"];
-                    disableEnable(myList, 'enable');
-                    myList = ["buttona", "buttonb", "buttonc", "buttond"]
-                    disableEnable(myList, 'enable');
-                    /* hide spin the wheel button if inactive player */
-                    if (userName != activePlayer){
-                        document.getElementById('spinthewheel').style.display = 'none';
-                    }
-                } else if (whichDiv == 'buzzer') {
-                    /* parse the answers */                    
-                    var mystring = JSON.stringify(choices);                    
-                    var newmystring = mystring.replace('[', '').replace(']', '').replace(/"/g, '');
-                    splits = newmystring.split(",");
-
-                    /* populates the question on both buzzer, answer pages and result page */
-                    document.getElementById('buzzercategory').innerHTML = category;     document.getElementById('answercategory').innerHTML = category;
-                    document.getElementById('buzzerquestion').innerHTML = question;     document.getElementById('answerquestion').innerHTML = question;
-                    document.getElementById('buzzeranswers').innerHTML = 'A. ' + splits[0] + ' B. ' + splits[1] + ' C. ' + splits[2] + ' D. ' + splits[3];       
-                    document.getElementById('answeranswers').innerHTML = 'A. ' + splits[0] + ' B. ' + splits[1] + ' C. ' + splits[2] + ' D. ' + splits[3];  
-                    document.getElementById('resultcorrectanswer').innerHTML = 'The correct answer was - ' + atob(correctAnswer);
-                    /* puts 5 second countdown timer on buzzer screen */
-                    display = document.querySelector('#time');
-                    startTimer(5, display);
-                } 
-                
-                if (userName == activePlayer) {
-                    document.getElementById(whichDiv + '_activediv').style.display = 'block';
-                    document.getElementById(whichDiv + '_inactivediv').style.display = 'none';
-                } else {
-                    /* this deals with putting the active players name on the screen */
-                    if (whichDiv == 'wheel' || whichDiv == 'pointvalue' || whichDiv == 'answer' || whichDiv == 'result') {
-                        original = document.getElementById(whichDiv + '_inactivediv').innerHTML;
-                        result = original.substr(original.indexOf(" ") + 1);
-                        document.getElementById(whichDiv + '_inactivediv').innerHTML = activePlayer + ' ' + result;
-                    }
-
-                    /* grays out values for inactive player */
-                    if (whichDiv == 'pointvalue') {
-                        myList = ["button10", "button20", "button30", "button40", "button50"];
-                        disableEnable(myList, 'disable');
-                    }
-
-                    /* grays out question choices for inactive player */
-                    if (whichDiv == 'pointvalue') {
-                        myList = ["buttona", "buttonb", "buttonc", "buttond"]
-                        disableEnable(myList, 'disable');
-                    }
-                    document.getElementById(whichDiv + '_inactivediv').style.display = 'block';
-                    document.getElementById(whichDiv + '_activediv').style.display = 'none';
-                }
-            }
-
-            /* this function turns buttons on and off */
-            function disableEnable (theList, status) {
-                var arrayLength = theList.length;
-                for (var i = 0; i < arrayLength; i++) {
-                    if (status == 'disable') {
-                        document.getElementById(theList[i]).disabled = true;    document.getElementById(theList[i]).style.backgroundColor = 'gray';    document.getElementById(theList[i]).style.cursor = 'not-allowed';
-                    } else {
-                        document.getElementById(theList[i]).disabled = false;    document.getElementById(theList[i]).style.backgroundColor = 'yellow';    document.getElementById(theList[i]).style.cursor = 'pointer';
-                    }
-                }
-            }
-    
-            function startBuzzer () {
-                buzzerStart = Date.now();
-                elapsedTime = 0             // reset buzzer & elapsedTime = 0 means no buzzer press
-    
-                setTimeout(() => {
-                    turnOn('answer');
-                }, 7000);                 
-            }
-    
-            function stopBuzzer () {
-                    elapsedTime = Math.floor((Date.now() - buzzerStart));
-                    console.log('buzzer milliseconds: ' + elapsedTime);
-                    /* turnOn('answer'); */ /* i have a bug here where if you press this it still forwards in 5 seconds */
-            }
-
-            function sendPoints (pointValue) {
-                fetch(`/api/question?category=${category}&points=${pointValue}`)
-                .then((resp) => resp.json())
-                .then(function(data) {
-                    let t_question = data.question;
-                    questionID = data.question_id;
-                    let t_choices = data.choices;
-                    choicesID = data.choices_id;
-                    let t_correctAnswer = data.correct_answer;
-                chatSocket.send(JSON.stringify({
-                    'event': "CHOOSE",
-                    'question': t_question,
-                    'choices': t_choices,
-                    'correct_answer': t_correctAnswer
-                    }));
-                });
-            }
-        </script>
         <script type="text/javascript" src="https://bicoastal-bytes.github.io/FA_2021_Software_Engineering/images/Winwheel.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
-        <script language='javascript' type='text/javascript'>
-         
-         let theWheel;
-
-         function setUpWheel () {  
-
-            theWheel = new Winwheel({
-            'numSegments'  : 6,     // Specify number of segments.
-            'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
-            'textFontSize' : 28,    // Set font size as desired.
-            'segments'     :        // Define segments including colour and text.
-            [
-            {'fillStyle' : '#ffbdbd', 'text' : 'Animals'},
-            {'fillStyle' : '#89f26e', 'text' : 'History'},
-            {'fillStyle' : '#7de6ef', 'text' : 'Literature'},
-            {'fillStyle' : '#e7706f', 'text' : 'Philosophy'},
-            {'fillStyle' : '#eae56f', 'text' : 'Science'},
-            {'fillStyle' : '#b795fc', 'text' : 'Sports'}
-            ],
-            'animation' :
-            {
-                'type'          : 'spinToStop',
-                'duration'      : 5,
-                'spins'         : 8,
-                'callbackAfter' : 'drawTriangle()'
-            }
-        });
-
-    }
-    
-    
-
-        // Function with formula to work out stopAngle before spinning animation.
-        // Called from Click of the Spin button.
-        function calculatePrize(angle, cats = null)
-        {           
-            /* initialize the wheel each turn */
-            setUpWheel();
-
-            // This formula always makes the wheel stop somewhere inside prize 3 at least
-            // 1 degree away from the start and end edges of the segment.
-            let stopAt = (angle + Math.floor((Math.random() * 58)))
-
-            // Important thing is to set the stopAngle of the animation before stating the spin.
-            theWheel.animation.stopAngle = stopAt;
-
-            // May as well start the spin from here.
-            theWheel.startAnimation();
-
-            // forward to the point value page after wheel has spun
-            setTimeout(() => {
-                    turnOn('pointvalue');
-                }, 7000);   
-        }
-
-        // Usual pointer drawing code.
-        drawTriangle();
-
-        function drawTriangle()
-        {
-            // Get the canvas context the wheel uses.
-            let ctx = theWheel.ctx;
-
-            ctx.strokeStyle = 'navy';     // Set line colour.
-            ctx.fillStyle   = 'aqua';     // Set fill colour.
-            ctx.lineWidth   = 2;
-            ctx.beginPath();              // Begin path.
-            ctx.moveTo(180, 5);           // Move to initial position.
-            ctx.lineTo(240, 5);           // Draw lines to make the shape.
-            ctx.lineTo(210, 40);
-            ctx.lineTo(180, 5);
-            ctx.stroke();                 // Complete the path by stroking (draw lines).
-            ctx.fill();                   // Then fill.
-        }
-
-
-        /* countdown timer for the buzzer screen */
-
-        function startTimer(duration, display) {
-            var timer = duration, minutes, seconds;
-            setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                display.textContent = seconds;
-
-                if (--timer < 0) {
-                    timer = duration;
-                }
-            }, 1000);
-        }
-
-        </script>
+       
     </body>
 </html>
