@@ -118,6 +118,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             )
         
         if event == 'ANSWER':
+            logger.debug('Got an Answer')
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
@@ -125,6 +126,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     'event': 'ANSWER',
                     'message': text_data_json['message'],
                     'user_choice': text_data_json['userChoice']
+                }
+            )
+        
+        if event == 'BUZZ':
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'chat_message',
+                    'event': 'BUZZ',
+                    'player': text_data_json['player'],
+                    'time': text_data_json['time']
                 }
             )
         # if event == 'UPDATE_TABLE':

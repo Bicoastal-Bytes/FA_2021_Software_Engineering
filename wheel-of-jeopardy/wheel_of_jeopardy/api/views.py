@@ -155,6 +155,18 @@ def populate_wheel(request):
         }
         return JsonResponse(return_value)
 
+def buzz_in(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        logger.debug(f"Data recieved: {data}")
+        current_player = user_list.get_active_player()
+        logger.debug(current_player)
+        if current_player != data['player']:
+            user_list.make_player_inactive(current_player)
+            user_list.make_player_active(data.player)
+            logging.debug(user_list.get_active_player())
+        return JsonResponse({'active_player': user_list.get_active_player()})
+
 
 def __decode_pickle(key):
     return pickle.loads(client.get(key))

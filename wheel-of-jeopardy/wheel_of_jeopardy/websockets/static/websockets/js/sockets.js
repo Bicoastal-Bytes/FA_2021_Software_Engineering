@@ -1,14 +1,3 @@
-fetch('/api/remaining')
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function(data) {
-        appendData(data);
-    })
-    .catch(function(err){
-        console.log(`Error: ${err}`)
-    })
-
 var table = document.querySelector("#connected-players-table");
 const roomName = JSON.parse(document.getElementById('game-room').textContent);
 const userName = JSON.parse(document.getElementById('user-name').textContent);
@@ -19,6 +8,7 @@ let question = null;
 let choices = null;
 let questionPoint = null;
 let correctAnswer = null;
+let questionsLeft = null;
 
 const chatSocket = new WebSocket(
     'ws://'
@@ -45,6 +35,7 @@ chatSocket.onmessage = function(e) {
     let data = JSON.parse(e.data);
     data = data.payload;
     let chat_log = document.querySelector('#chat-log');
+    console.log(data.event);
     switch(data.event) {
         case "JOIN":
             fetch('/api/table')
@@ -66,6 +57,9 @@ chatSocket.onmessage = function(e) {
             .then(function(incoming) {
                 activePlayer = incoming.player;
             });
+
+            fetch('/api/remaining')
+            .eth
             break;
         
         case 'SEND':
@@ -94,11 +88,26 @@ chatSocket.onmessage = function(e) {
             break;
         
         case 'ANSWER':
+            console.log('Got an answer')
             document.getElementById('result_result').innerHTML = data.message;
             if (activePlayer != userName){
                 turnOn('result', data.user_choice);
             }
+            fetch('/api/remaining')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function(data) {
+                questionsLeft = data.remaining_questions;
+            })
+            .catch(function(err){
+                console.log(`Error: ${err}`);
+            });
             break;
+            
+        case 'BUZZ':
+            activePlayer = data.player
+
     }
 };
 
@@ -116,6 +125,7 @@ document.querySelector('#chat-message-input').onkeyup = function(e) {
         document.querySelector('#chat-message-submit').click();
     }
 };
+
 
 document.querySelector('#spinthewheel').onclick = function(e) { 
     let id = 0;
