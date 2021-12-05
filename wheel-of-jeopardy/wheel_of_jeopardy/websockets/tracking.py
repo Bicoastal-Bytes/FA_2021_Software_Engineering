@@ -53,3 +53,7 @@ class UserTracker():
     def get_player_score(self, player):
         score = next(filter(lambda d: d.get('player') == player, self.users), None)
         return score['score'] 
+    
+    def set_player_score(self, player, score):
+        player_score = next(filter(lambda d: d.get('player') == player, self.users), None)
+        player_score['score'] += score
