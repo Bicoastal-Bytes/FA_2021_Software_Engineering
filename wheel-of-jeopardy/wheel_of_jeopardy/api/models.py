@@ -18,6 +18,8 @@ class Question(models.Model):
     def __str__(self):
         return self.question
 
+    def question_point_value(self):
+        return self.point_value
 class Choices(models.Model):
     """Model representing the choices that a user has for questions"""
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE)

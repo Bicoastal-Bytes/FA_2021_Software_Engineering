@@ -15,7 +15,10 @@ def create_game(request):
 
 def join_game(request):
     form = RegisterForm()
-    available_games = pickle.loads(client.get('games'))
+    if client.get('games') != None:
+        available_games = pickle.loads(client.get('games'))
+    else:
+        available_games = []
     context = {
         'form': form,
         'games': available_games

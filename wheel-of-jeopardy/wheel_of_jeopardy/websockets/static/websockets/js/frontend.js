@@ -20,14 +20,29 @@ function turnOn (whichDiv, choice = null) {
     document.getElementById(whichDiv).style.display = 'block';
 
     if (choice != null) {
-        var correctMessage = (splits[choice] == atob(correctAnswer)) ? 'correctly' :'incorrectly';
-        var whoMessage = (activePlayer == userName) ? 'You' : activePlayer;
-        let message = `${whoMessage}' answered the question ${correctMessage}.`;
-        chatSocket.send(JSON.stringify({
-            'event': 'ANSWER',
-            'message': message,
-            'userChoice': choice
-        }));
+        const answer_data = {
+            'question_id': questionID,
+            'answer': splits[choice]
+        }
+        fetch('/api/validate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify(answer_data)
+        })
+        .then(resp => resp.json())
+        .then(function(data){
+            var correctMessage = (data.answer == true) ? 'correctly' :'incorrectly';
+            var whoMessage = (activePlayer = userName) ? 'You' : activePlayer;
+            let message = `${whoMessage}' answered the question ${correctMessage}.`;
+            chatSocket.send(JSON.stringify({
+                'event': 'ANSWER',
+                'message': message,
+                'userChoice': splits[choice]
+            }));
+        })
     }                
     
     if (whichDiv == 'wheel') {
@@ -109,6 +124,23 @@ function startBuzzer () {
 function stopBuzzer () {
         elapsedTime = Math.floor((Date.now() - buzzerStart));
         console.log('buzzer milliseconds: ' + elapsedTime);
+        const user = {'player': userName}
+        fetch('/api/buzz', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify(user)
+        })
+        .then(resp => resp.json())
+        .then(function(data) {
+            chatSocket.send(JSON.stringify({
+                'event': 'BUZZ',
+                'player': data.active_player,
+                'time': elapsedTime
+            }));
+        })
         /* turnOn('answer'); */ /* i have a bug here where if you press this it still forwards in 5 seconds */
 }
 

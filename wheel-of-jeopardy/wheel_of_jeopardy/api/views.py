@@ -84,7 +84,16 @@ def validate_answer(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         choice = Choices.objects.get(question_id_id=data['question_id'])
-        return JsonResponse({"answer": choice.check_correct_answer(data['answer'])})
+        question = Question.objects.get(id=data['question_id'])
+        points = question.question_point_value()
+        current_player = user_list.get_active_player()
+        result = choice.check_correct_answer(data['answer'])
+        if result:
+            user_list.set_player_score(current_player, points)
+        else:
+            user_list.set_player_score(current_player, -points)
+        
+        return JsonResponse({"answer": result})
 
 def generate_game(request):
     if request.method == 'POST':
@@ -146,6 +155,17 @@ def populate_wheel(request):
         }
         return JsonResponse(return_value)
 
+def buzz_in(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        logger.debug(f"Data recieved: {data}")
+        current_player = user_list.get_active_player()
+        logger.debug(current_player)
+        if current_player != data['player']:
+            user_list.make_player_inactive(current_player)
+            user_list.make_player_active(data.player)
+            logging.debug(user_list.get_active_player())
+        return JsonResponse({'active_player': user_list.get_active_player()})
 
 
 def __decode_pickle(key):
