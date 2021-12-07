@@ -32,6 +32,8 @@ function setUpWheel () {
 // Called from Click of the Spin button.
 function calculatePrize(angle, cats = null)
 {
+
+ console.log('angle: ' + angle);
     
 /* initialize the wheel each turn */
 setUpWheel();
