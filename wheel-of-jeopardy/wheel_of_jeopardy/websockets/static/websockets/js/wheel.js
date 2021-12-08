@@ -2,6 +2,12 @@ let theWheel = null;
 
 function setUpWheel () {  
 
+    fetch('/api/wheel')
+    .then(resp => resp.json())
+    .then(function(data) {
+        console.log(data.categories)
+    })
+
     theWheel = new Winwheel({
     'numSegments'  : 6,     // Specify number of segments.
     'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
