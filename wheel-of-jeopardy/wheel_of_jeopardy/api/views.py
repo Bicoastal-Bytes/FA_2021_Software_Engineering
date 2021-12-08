@@ -144,11 +144,13 @@ def get_category(request):
 def populate_wheel(request):
     if request.method == "GET":
         categories = []
+        i = 1
         for cat in category_list:
             data = {
                 'name': cat.name,
-                'id': category_list.index(cat)
+                'id': i * 30
             }
+            i += 2
             categories.append(data)
         return_value = {
             "categories": categories

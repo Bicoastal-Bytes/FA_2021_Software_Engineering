@@ -58,8 +58,8 @@ chatSocket.onmessage = function(e) {
                 activePlayer = incoming.player;
             });
 
-            fetch('/api/remaining')
-            .eth
+            // fetch('/api/remaining')
+            // .eth
             break;
         
         case 'SEND':
@@ -132,14 +132,17 @@ document.querySelector('#spinthewheel').onclick = function(e) {
     fetch('/api/category')
     .then((response) => response.json())
     .then(function(data) {
+        console.log(`Fetch category: ${data.category}`);
+        console.log(`Fetch id: ${data.id}`);
         category = data.category;
-        id = data.id
+        id = data.id;
+        chatSocket.send(JSON.stringify({
+            'event': 'SPIN',
+            'category': category,
+            'id': id
+        }));
     });
-    chatSocket.send(JSON.stringify({
-        'event': 'SPIN',
-        'category': category,
-        'id': id
-    }));
+   
 }
 
 document.querySelector('#chat-message-submit').onclick = function(e) {
