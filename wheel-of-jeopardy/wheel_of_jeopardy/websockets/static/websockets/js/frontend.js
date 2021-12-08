@@ -61,6 +61,9 @@ function turnOn (whichDiv, choice = null) {
         var newmystring = mystring.replace('[', '').replace(']', '').replace(/"/g, '');
         splits = newmystring.split(",");
 
+        /* reset the buzzer image */
+        document.getElementById('thebuzzerimage').src='https:\/\/bicoastal-bytes.github.io/FA_2021_Software_Engineering/images/buzzer.png';
+
         /* populates the question on both buzzer, answer pages and result page */
         document.getElementById('buzzercategory').innerHTML = category;     document.getElementById('answercategory').innerHTML = category;
         document.getElementById('buzzerquestion').innerHTML = question;     document.getElementById('answerquestion').innerHTML = question;

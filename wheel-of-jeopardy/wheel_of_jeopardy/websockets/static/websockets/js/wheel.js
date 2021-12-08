@@ -1,25 +1,40 @@
 let theWheel = null;
+let arr = new Array(6);
+let catArray = ['Animals', 'Entertainment: Film', 'History', 'Celebrities', 'Geography', 'Entertainment: Books'];
 
 function setUpWheel () {  
 
     fetch('/api/wheel')
     .then(resp => resp.json())
     .then(function(data) {
-        console.log(data.categories)
+        arr = data.categories;
     })
+
+    for (var i = 0; i < arr.length; i++){
+        //document.write("<br><br>array index: " + i);
+        var obj = arr[i];
+        for (var key in obj){
+          var value = obj[key];
+          if (key == 'name') {
+            //document.write("<br> - " + key + ": " + value);
+            catArray[i] = value;
+            }
+        }
+      }
+
 
     theWheel = new Winwheel({
     'numSegments'  : 6,     // Specify number of segments.
     'outerRadius'  : 212,   // Set outer radius so wheel fits inside the background.
-    'textFontSize' : 28,    // Set font size as desired.
+    'textFontSize' : 14,    // Set font size as desired.
     'segments'     :        // Define segments including colour and text.
     [
-    {'fillStyle' : '#ffbdbd', 'text' : 'Computers'},
-    {'fillStyle' : '#89f26e', 'text' : 'Animals'},
-    {'fillStyle' : '#7de6ef', 'text' : 'Literature'},
-    {'fillStyle' : '#e7706f', 'text' : 'Philosophy'},
-    {'fillStyle' : '#eae56f', 'text' : 'History'},
-    {'fillStyle' : '#b795fc', 'text' : 'Sports'}
+    {'fillStyle' : '#ffbdbd', 'text' : catArray[0]},
+    {'fillStyle' : '#89f26e', 'text' : catArray[1]},
+    {'fillStyle' : '#7de6ef', 'text' : catArray[2]},
+    {'fillStyle' : '#e7706f', 'text' : catArray[3]},
+    {'fillStyle' : '#eae56f', 'text' : catArray[4]},
+    {'fillStyle' : '#b795fc', 'text' : catArray[5]}
     ],
     'animation' :
     {
