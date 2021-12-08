@@ -133,6 +133,18 @@ def get_category(request):
     if request.method == "GET":
         random_category = random.choice(category_list)
         id = category_list.index(random_category)
+        if id == 0:
+            id = 30
+        elif id == 1:
+            id = 90
+        elif id == 2:
+            id = 150
+        elif id == 3:
+            id = 210
+        elif id == 4:
+            id = 270
+        else:
+            id = 330
         response_data = {
            'category': random_category.name,
            'id': id 

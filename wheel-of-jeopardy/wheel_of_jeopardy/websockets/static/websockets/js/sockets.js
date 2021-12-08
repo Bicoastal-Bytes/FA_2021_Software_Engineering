@@ -80,6 +80,7 @@ chatSocket.onmessage = function(e) {
             category = data.category;
             calculatePrize(data.id);
             break;
+
         case 'CHOOSE':
             question = data.question;
             choices = data.choices;
@@ -132,8 +133,6 @@ document.querySelector('#spinthewheel').onclick = function(e) {
     fetch('/api/category')
     .then((response) => response.json())
     .then(function(data) {
-        console.log(`Fetch category: ${data.category}`);
-        console.log(`Fetch id: ${data.id}`);
         category = data.category;
         id = data.id;
         chatSocket.send(JSON.stringify({
