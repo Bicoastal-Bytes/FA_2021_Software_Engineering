@@ -177,7 +177,7 @@ def buzz_in(request):
         logger.debug(current_player)
         if current_player != data['player']:
             user_list.make_player_inactive(current_player)
-            user_list.make_player_active(data.player)
+            user_list.make_player_active(data['player'])
             logging.debug(user_list.get_active_player())
         return JsonResponse({'active_player': user_list.get_active_player()})
 
