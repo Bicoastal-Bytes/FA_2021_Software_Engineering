@@ -107,7 +107,9 @@ chatSocket.onmessage = function(e) {
             break;
             
         case 'BUZZ':
-            activePlayer = data.player
+            activePlayer = data.player;
+            turnOn('answer');
+            break;
 
     }
 };
