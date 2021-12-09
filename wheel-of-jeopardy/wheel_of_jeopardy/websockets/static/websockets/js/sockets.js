@@ -1,6 +1,7 @@
-var table = document.querySelector("#connected-players-table");
+let table = document.querySelector("#connected-players-table");
 const roomName = JSON.parse(document.getElementById('game-room').textContent);
 const userName = JSON.parse(document.getElementById('user-name').textContent);
+const chat_log = document.querySelector('#chat-log');
 let userList = null;
 let activePlayer = null;
 let category = null;
@@ -9,6 +10,7 @@ let choices = null;
 let questionPoint = null;
 let correctAnswer = null;
 let questionsLeft = null;
+let questionID = null;
 
 const chatSocket = new WebSocket(
     'ws://'
@@ -34,24 +36,11 @@ Process events coming from the socket
 chatSocket.onmessage = function(e) {
     let data = JSON.parse(e.data);
     data = data.payload;
-    let chat_log = document.querySelector('#chat-log');
+    
     console.log(data.event);
     switch(data.event) {
         case "JOIN":
-            fetch('/api/table')
-            .then((resp) => resp.json())
-            .then(function(resp_data) {
-                let table_data = JSON.parse(resp_data);
-                userList = table_data;
-                console.log(`Recieved Data Joining:${resp_data}`);
-                chat_log.value += (data.message + '\n');
-                console.log(table_data)
-                deleteTableData(table);
-                generateTable(table, table_data);
-                let header = Object.keys(table_data[0]);
-                generateTableHead(table, header);
-            });
-
+            getPlayerData(data);            
             fetch('/api/active')
             .then((response) => response.json())
             .then(function(incoming) {
@@ -100,6 +89,7 @@ chatSocket.onmessage = function(e) {
             })
             .then(function(data) {
                 questionsLeft = data.remaining_questions;
+                getPlayerData(data);
             })
             .catch(function(err){
                 console.log(`Error: ${err}`);

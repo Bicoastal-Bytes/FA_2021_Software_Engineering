@@ -76,7 +76,8 @@ def unregister_user(request):
 def get_user_table(request):
     if request.method == 'GET':
         table_data = pickle.loads(client.get('user_list'))
-        json_data = json.dumps(table_data.get_connected_users())
+        # json_data = json.dumps(table_data.get_connected_users())
+        json_data = json.dumps(user_list.get_connected_users())
         logger.debug(json_data)
         return JsonResponse(json_data, safe=False)
 
@@ -88,10 +89,11 @@ def validate_answer(request):
         points = question.question_point_value()
         current_player = user_list.get_active_player()
         result = choice.check_correct_answer(data['answer'])
+        logger.debug(f'''Question point value {points}''')
         if result:
-            user_list.set_player_score(current_player, points)
+            user_list.set_player_score(current_player, points/10)
         else:
-            user_list.set_player_score(current_player, -points)
+            user_list.set_player_score(current_player, -points/10)
         
         return JsonResponse({"answer": result})
 
