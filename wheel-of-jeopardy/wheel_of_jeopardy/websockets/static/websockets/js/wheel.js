@@ -3,6 +3,7 @@ let arr = new Array(6);
 let catArray = ['Animals', 'Entertainment: Film', 'History', 'Celebrities', 'Geography', 'Entertainment: Books'];
 
 function setUpWheel () {  
+    
 
     fetch('/api/wheel')
     .then(resp => resp.json())

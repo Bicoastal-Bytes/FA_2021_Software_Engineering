@@ -46,6 +46,9 @@ function turnOn (whichDiv, choice = null) {
     }                
     
     if (whichDiv == 'wheel') {
+        /* set the number of quesitons left in the top */
+        document.getElementById('id-remaining-questions').innerHTML = "Questions Left : " + questionsLeft;
+        
         /* reset turned off divs for next turn */
         myList = ["button10", "button20", "button30", "button40", "button50"];
         disableEnable(myList, 'enable');
