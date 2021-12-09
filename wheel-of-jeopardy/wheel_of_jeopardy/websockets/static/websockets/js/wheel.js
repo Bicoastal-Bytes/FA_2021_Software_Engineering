@@ -61,7 +61,7 @@ setUpWheel();
 
 // This formula always makes the wheel stop somewhere inside prize 3 at least
 // 1 degree away from the start and end edges of the segment.
-let stopAt = (angle + Math.floor((Math.random() * 58)))
+let stopAt = angle;
 
 // Important thing is to set the stopAngle of the animation before stating the spin.
 theWheel.animation.stopAngle = stopAt;
