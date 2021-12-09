@@ -14,7 +14,7 @@ function turnOn (whichDiv, choice = null) {
     var result;
     var myList;
 
-    document.getElementById('debugging').innerHTML = 'userList: ' + userList + '<br>' + 'activePlayer: ' + activePlayer + '<br>' + 'category: ' + category  + '<br>' + 'question: ' + question  + '<br>' + 'choices: ' + choices + '<br>' + 'questionPoint: ' + questionPoint  + '<br>' + 'correctAnswer: ' + atob(correctAnswer) + '<br>';
+    document.getElementById('debugging').innerHTML = 'userList: ' + userList + '<br>' + 'activePlayer: ' + activePlayer + '<br>' + 'category: ' + category  + '<br>' + 'question: ' + question  + '<br>' + 'choices: ' + choices + '<br>' + 'questionPoint: ' + questionPoint  + '<br>' + 'correctAnswer: ' + atob(correctAnswer) + '<br>' + 'questionsLeft: ' + questionsLeft + '<br>';
 
     turnOff(); 
     document.getElementById(whichDiv).style.display = 'block';
@@ -79,7 +79,8 @@ function turnOn (whichDiv, choice = null) {
     if (userName == activePlayer) {
         document.getElementById(whichDiv + '_activediv').style.display = 'block';
         document.getElementById(whichDiv + '_inactivediv').style.display = 'none';
-    } else {
+    } 
+    else {
         /* this deals with putting the active players name on the screen */
         if (whichDiv == 'wheel' || whichDiv == 'pointvalue' || whichDiv == 'answer' || whichDiv == 'result') {
             original = document.getElementById(whichDiv + '_inactivediv').innerHTML;
@@ -87,17 +88,19 @@ function turnOn (whichDiv, choice = null) {
             document.getElementById(whichDiv + '_inactivediv').innerHTML = activePlayer + ' ' + result;
         }
 
-        /* grays out values for inactive player */
         if (whichDiv == 'pointvalue') {
+            /* grays out values for inactive player */
             myList = ["button10", "button20", "button30", "button40", "button50"];
             disableEnable(myList, 'disable');
         }
+        
 
-        /* grays out question choices for inactive player */
-        if (whichDiv == 'pointvalue') {
+        if (whichDiv == 'answer') {
+            /* grays out question choices for inactive player */
             myList = ["buttona", "buttonb", "buttonc", "buttond"]
             disableEnable(myList, 'disable');
         }
+        
         document.getElementById(whichDiv + '_inactivediv').style.display = 'block';
         document.getElementById(whichDiv + '_activediv').style.display = 'none';
     }
