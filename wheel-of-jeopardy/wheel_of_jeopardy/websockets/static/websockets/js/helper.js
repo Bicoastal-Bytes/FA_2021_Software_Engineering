@@ -32,6 +32,23 @@ function getCategory() {
    let response =  fetch('/')
 }
 
+function getPlayerData(data){
+    fetch('/api/table')
+    .then((resp) => resp.json())
+    .then(function(resp_data) {
+        let table_data = JSON.parse(resp_data);
+        userList = table_data;
+        console.log(`Recieved Data Joining:${resp_data}`);
+        chat_log.value += (data.message + '\n');
+        console.log(table_data)
+        deleteTableData(table);
+        generateTable(table, table_data);
+        let header = Object.keys(table_data[0]);
+        generateTableHead(table, header);
+    });
+}
+
+
 function appendData(data) {
     var mainContainer = document.getElementById("id-remaining-questions");
     var div = document.createElement("div");
