@@ -88,14 +88,18 @@ function turnOn (whichDiv, choice = null) {
             document.getElementById(whichDiv + '_inactivediv').innerHTML = activePlayer + ' ' + result;
         }
 
-        /* grays out values for inactive player */
-        //myList = ["button10", "button20", "button30", "button40", "button50"];
-        //disableEnable(myList, 'disable');
+        if (whichDiv == 'pointvalue') {
+            /* grays out values for inactive player */
+            myList = ["button10", "button20", "button30", "button40", "button50"];
+            disableEnable(myList, 'disable');
+        }
         
 
-        /* grays out question choices for inactive player */
-        //myList = ["buttona", "buttonb", "buttonc", "buttond"]
-        //disableEnable(myList, 'disable');
+        if (whichDiv == 'answer') {
+            /* grays out question choices for inactive player */
+            myList = ["buttona", "buttonb", "buttonc", "buttond"]
+            disableEnable(myList, 'disable');
+        }
         
         document.getElementById(whichDiv + '_inactivediv').style.display = 'block';
         document.getElementById(whichDiv + '_activediv').style.display = 'none';
