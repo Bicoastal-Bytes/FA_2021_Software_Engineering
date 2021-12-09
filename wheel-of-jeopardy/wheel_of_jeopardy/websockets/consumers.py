@@ -126,6 +126,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     'time': text_data_json['time']
                 }
             )
+        
+        if event == 'START':
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type':'chat_message',
+                    'event': 'START'
+                }
+            )
         # if event == 'UPDATE_TABLE':
         #     users = self.userTrack.get_connected_users()
         #     await self.channel_layer.group_send(
