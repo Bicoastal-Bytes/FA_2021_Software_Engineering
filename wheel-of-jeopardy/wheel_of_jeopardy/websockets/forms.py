@@ -10,7 +10,7 @@ class RegisterForm(forms.Form):
         """Basically here to make things look nice"""
         super(RegisterForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control'
+            visible.field.widget.attrs['class'] = 'rounded border border-black'
 
 class CreationForm(forms.Form):
     """Form to choose how many players """
@@ -31,4 +31,4 @@ class CreationForm(forms.Form):
         """Basically here to make things look nice"""
         super(CreationForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
-            visible.field.widget.attrs['class'] = 'form-control'
+            visible.field.widget.attrs['class'] = 'rounded border border-black'
