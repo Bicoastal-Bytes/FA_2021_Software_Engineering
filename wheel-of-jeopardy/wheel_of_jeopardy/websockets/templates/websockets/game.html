@@ -31,17 +31,7 @@
                 </div>
             </header>
 
-            <!--
-            <div class="m-10">
-            <div class="flex justify-between mt-10">
-                <div id="timer">
-                    Timer Area
-                </div>
-                <div id="scoreboard">
-                    ecoreboard Area
-                </div>
-            </div>
-            -->
+            
             <!-- ********************************************** -->
             <!--                 Content Area                   -->
             <!-- ********************************************** -->
@@ -60,16 +50,8 @@
                 <div class="flex flex-row">
                     <div class="mx-auto">
                         <div class="mx-auto">
-                            <button id="spinthewheel" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">spin the wheel</button>
-                            <!--
-                            <form>
-                                <input type="radio" name="wheelcat" onchange="calculatePrize(1); this.checked = false;"> Animals
-                                <input type="radio" name="wheelcat" onchange="calculatePrize(61); this.checked = false;"> History
-                                <input type="radio" name="wheelcat" onchange="calculatePrize(121); this.checked = false;"> Literature
-                                <input type="radio" name="wheelcat" onchange="calculatePrize(181); this.checked = false;"> Philosophy
-                                <input type="radio" name="wheelcat" onchange="calculatePrize(241); this.checked = false;"> Science
-                                <input type="radio" name="wheelcat" onchange="calculatePrize(301); this.checked = false;"> Sports
-                            </form>-->
+                            <center><button id="spinthewheel" class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">spin the wheel</button></center>
+                            
                         </div>
                         <div class="mx-auto">
                             <canvas id="canvas" width="434" height="434">
@@ -163,24 +145,24 @@
                     <div class="w-1/6"></div>
                     <div class="mx-auto w-1/6 m-4">
                         <div class="bg-blue-300 outline-bk text-center text-white font-extrabold py-4 text-2xl">
-                            30
-                            <div id="player1" class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-gloria text-4xl">
+                            <div id='player1score'>30</div>
+                            <div id="player1" class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-gloria text-3xl">
                                 Laurie
                             </div>
                         </div>
                     </div>
                     <div class="mx-auto w-1/6 m-4">
                         <div class="bg-blue-300 outline-bk text-center text-white font-extrabold py-4 text-2xl">
-                            0
-                            <div id="player2" class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-parisienne text-4xl">
+                            <div id='player2score'>30</div>
+                            <div id="player2" class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-parisienne text-3xl">
                                 Clayton
                             </div>
                         </div>
                     </div>
                     <div class="mx-auto w-1/6 m-4">
-                        <div id="player3" class="bg-blue-300 outline-bk text-center text-white font-extrabold py-4 text-2xl">
-                            0
-                            <div class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-lakki text-4xl">
+                        <div class="bg-blue-300 outline-bk text-center text-white font-extrabold py-4 text-2xl">
+                            <div id='player3score'>30</div>
+                            <div id="player3" class="border-t-100 border-b-150 border-blue-900 py-10 text-blue-900 mt-4 font-lakki text-3xl">
                                 Jordan
                             </div>
                         </div>
@@ -188,6 +170,8 @@
                     <div class="w-1/6"></div>
                 </div>
                 <div id="whichbutton"><button id='next-button' class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded">next question</button></div>
+                
+                <div id="endresult"><button id='next-button' class="bg-yellow-200 hover:bg-blue-200 text-black font-bold py-2 px-2 rounded" onclick="turnOn('gameresult')">game result</button></div>
                 
 
             </div>
@@ -197,7 +181,8 @@
                 <div id="gameresult_inactivediv" class="text-center text-yellow-300 m-8 text-2xl font-cinzel"></div>
            
                 <div class="gameresult_inactiveplayermessage gameresult_activeplayerdiv"></div>
-                <p class="text-center text-yellow-300 m-16 text-2xl font-cinzel">Laurie won the game with 30 points.</p>
+                <p class="text-center text-yellow-300 m-16 text-2xl font-cinzel" id="winnermessage">winner</p>
+                <img src="https://bicoastal-bytes.github.io/FA_2021_Software_Engineering/images/alex_dance.png" alt="alex trebek dancing">
             </div>
             </div>
             <!-- ********************************************** -->

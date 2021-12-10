@@ -3,7 +3,7 @@ let arr = new Array(6);
 let catArray = ['Animals', 'Entertainment: Film', 'History', 'Celebrities', 'Geography', 'Entertainment: Books'];
 
 function setUpWheel () {  
-    
+
 
     fetch('/api/wheel')
     .then(resp => resp.json())
@@ -54,8 +54,13 @@ function setUpWheel () {
 // Called from Click of the Spin button.
 function calculatePrize(angle, cats = null)
 {
-
- console.log('angle: ' + angle);
+    
+    if (questionsLeft <= 1) {
+        document.getElementById('endresult').style.display = 'block';
+        document.getElementById('whichbutton').style.display = 'none';
+    } else {
+        document.getElementById('endresult').style.display = 'none';
+    }
     
 /* initialize the wheel each turn */
 setUpWheel();

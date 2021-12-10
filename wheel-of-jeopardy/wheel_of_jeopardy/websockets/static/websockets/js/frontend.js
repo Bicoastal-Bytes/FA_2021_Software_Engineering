@@ -15,7 +15,7 @@ function turnOn (whichDiv, choice = null) {
     var result;
     var myList;
 
-    document.getElementById('debugging').innerHTML = 'userList: ' + userList + '<br>' + 'activePlayer: ' + activePlayer + '<br>' + 'category: ' + category  + '<br>' + 'question: ' + question  + '<br>' + 'choices: ' + choices + '<br>' + 'questionPoint: ' + questionPoint  + '<br>' + 'correctAnswer: ' + atob(correctAnswer) + '<br>' + 'questionsLeft: ' + questionsLeft + '<br>';
+    document.getElementById('debugging').innerHTML = 'userList: ' + JSON.stringify(userList)  + '<br>' + 'activePlayer: ' + activePlayer + '<br>' + 'category: ' + category  + '<br>' + 'question: ' + question  + '<br>' + 'choices: ' + choices + '<br>' + 'questionPoint: ' + questionPoint  + '<br>' + 'correctAnswer: ' + atob(correctAnswer) + '<br>' + 'questionsLeft: ' + questionsLeft + '<br>';
 
     turnOff(); 
     document.getElementById(whichDiv).style.display = 'block';
@@ -38,7 +38,7 @@ function turnOn (whichDiv, choice = null) {
         .then(function(data){
             var correctMessage = (data.answer == true) ? 'correctly' :'incorrectly';
             var whoMessage = (activePlayer = userName) ? 'You' : activePlayer;
-            let message = `${whoMessage}' answered the question ${correctMessage}.`;
+            let message = `${whoMessage} answered the question ${correctMessage}.`;
             chatSocket.send(JSON.stringify({
                 'event': 'ANSWER',
                 'message': message,
@@ -59,7 +59,10 @@ function turnOn (whichDiv, choice = null) {
         /* hide spin the wheel button if inactive player */
         if (userName !== activePlayer){
             document.getElementById('spinthewheel').style.display = 'none';
+        } else {
+            document.getElementById('spinthewheel').style.display = 'block';
         }
+        
     } else if (whichDiv == 'buzzer') {
         /* parse the answers */                    
         var mystring = JSON.stringify(choices);                    
@@ -79,7 +82,43 @@ function turnOn (whichDiv, choice = null) {
         display = document.querySelector('#time');
         startTimer(5, display);
         startBuzzer();
-    } 
+    } else if (whichDiv == 'gameresult') {
+        
+        /* question left says 0 */
+        document.getElementById('id-remaining-questions').innerHTML = 'Questions Left: 0';
+
+        let arr2 = userList;
+        let playerArray = new Array(3);
+        let scoreArray = new Array(3);
+
+        // keys are player, active and score
+        for (var i = 0; i < arr2.length; i++){
+            var obj = arr2[i];
+            scoreArray[i] = obj['score'];
+            playerArray[i] = obj['player'];
+          } 
+
+        const max = Math.max.apply(Math, scoreArray.map((i) => i));
+        const indexLargest = scoreArray.indexOf(max);
+
+        //indexLargest = scoreArray.indexOf(Math.max.apply(null, scoreArray));
+        console.log('indexLargest: ' + indexLargest);
+        document.getElementById('winnermessage').innerHTML = playerArray[indexLargest] + " won the game with " + scoreArray[indexLargest] + ' points.' ;
+    } else if (whichDiv == 'result') {
+        let arr2 = userList;
+        let playerArray2 = new Array(3);
+        let scoreArray2 = new Array(3);
+
+        // keys are player, active and score
+        for (var i = 0; i < arr2.length; i++){
+            var obj = arr2[i];
+            scoreArray2[i] = obj['score'];
+            playerArray2[i] = obj['player'];
+          }
+          document.getElementById('player1score').innerHTML = scoreArray2[0];   document.getElementById('player2score').innerHTML = scoreArray2[1]; document.getElementById('player3score').innerHTML = scoreArray2[2];
+          document.getElementById('player1').innerHTML = playerArray2[0];       document.getElementById('player2').innerHTML = playerArray2[1];     document.getElementById('player3').innerHTML = playerArray2[2];
+
+    }
     
     if (userName == activePlayer) {
         document.getElementById(whichDiv + '_activediv').style.display = 'block';
