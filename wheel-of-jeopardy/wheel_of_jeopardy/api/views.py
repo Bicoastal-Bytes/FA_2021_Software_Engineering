@@ -31,9 +31,10 @@ def get_question(request):
         category = request.GET['category']
         points = request.GET['points']
         question = list(Question.objects.filter(category__name=category, point_value=points))
-        logger.debug('Communicating with database to get question')
+        logger.debug(f"Communicating with database to get question: {question[0]}")
         choices = list(Choices.objects.filter(question_id=question[0].id))
-        logger.debug('Communicating with database to get choices for question')
+        logger.debug(f"Communicating with database to get choices for question: {choices[0].id}")
+
         random.shuffle(choices[0].choices)
         response_data = {
             "question": question[0].question,
@@ -84,6 +85,7 @@ def get_user_table(request):
 def validate_answer(request):
     if request.method == 'POST':
         data = json.loads(request.body)
+        logger.debug(f"Data recieved: {data}")
         choice = Choices.objects.get(question_id_id=data['question_id'])
         question = Question.objects.get(id=data['question_id'])
         points = question.question_point_value()

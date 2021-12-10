@@ -1,6 +1,7 @@
 
 var buzzerStart = 0; 
-var elapsedTime = 0;   
+var elapsedTime = 0; 
+let buzzerTimeout = null;  
 var splits = null;      // this variable splits up the question answer
 var splitschoice = 0;   
 
@@ -20,6 +21,7 @@ function turnOn (whichDiv, choice = null) {
     document.getElementById(whichDiv).style.display = 'block';
 
     if (choice != null) {
+        console.log(`Answering Question ID: ${questionID}`);
         const answer_data = {
             'question_id': questionID,
             'answer': splits[choice]
@@ -55,7 +57,7 @@ function turnOn (whichDiv, choice = null) {
         myList = ["buttona", "buttonb", "buttonc", "buttond"]
         disableEnable(myList, 'enable');
         /* hide spin the wheel button if inactive player */
-        if (userName != activePlayer){
+        if (userName !== activePlayer){
             document.getElementById('spinthewheel').style.display = 'none';
         }
     } else if (whichDiv == 'buzzer') {
@@ -125,13 +127,14 @@ function startBuzzer () {
     let buzzerStart = Date.now();
     elapsedTime = 0             // reset buzzer & elapsedTime = 0 means no buzzer press
 
-    setTimeout(() => {
+    buzzerTimeout = setTimeout(() => {
         turnOn('answer');
     }, 7000);                 
 }
 
 function stopBuzzer () {
         elapsedTime = Math.floor((Date.now() - buzzerStart));
+        clearTimeout(buzzerTimeout);
         console.log('buzzer milliseconds: ' + elapsedTime);
         const user = {'player': userName}
         fetch('/api/buzz', {
@@ -162,9 +165,11 @@ function sendPoints (pointValue) {
         let t_choices = data.choices;
         choicesID = data.choices_id;
         let t_correctAnswer = data.correct_answer;
+        console.log(`Question ID Recieved: ${data.question_id}`);
     chatSocket.send(JSON.stringify({
         'event': "CHOOSE",
         'question': t_question,
+        'question_id': questionID,
         'choices': t_choices,
         'correct_answer': t_correctAnswer
         }));

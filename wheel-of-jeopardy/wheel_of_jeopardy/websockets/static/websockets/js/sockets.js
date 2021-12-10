@@ -77,13 +77,14 @@ chatSocket.onmessage = function(e) {
             question = data.question;
             choices = data.choices;
             correctAnswer = data.correct_answer;
+            questionID = data.question_id;
             turnOn('buzzer');
             break;
         
         case 'ANSWER':
             console.log('Got an answer')
             document.getElementById('result_result').innerHTML = data.message;
-            if (activePlayer != userName){
+            if (activePlayer !== userName){
                 turnOn('result');
             }
             fetch('/api/remaining')
@@ -107,7 +108,6 @@ chatSocket.onmessage = function(e) {
         case 'START':
             turnOn('wheel');
             break;
-
     }
 };
 
@@ -144,6 +144,12 @@ document.querySelector('#spinthewheel').onclick = function(e) {
 }
 
 document.querySelector('#start-game-button').onclick = function(e) {
+    chatSocket.send(JSON.stringify({
+        'event': 'START'
+    }));
+}
+
+document.querySelector('#next-button').onclick = function(e) {
     chatSocket.send(JSON.stringify({
         'event': 'START'
     }));

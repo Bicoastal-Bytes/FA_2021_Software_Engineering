@@ -100,7 +100,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                     'event': 'CHOOSE',
                     'question': text_data_json['question'],
                     'choices': text_data_json['choices'],
-                    'correct_answer': text_data_json['correct_answer']
+                    'correct_answer': text_data_json['correct_answer'],
+                    'question_id': text_data_json['question_id']
                 }
             )
         
