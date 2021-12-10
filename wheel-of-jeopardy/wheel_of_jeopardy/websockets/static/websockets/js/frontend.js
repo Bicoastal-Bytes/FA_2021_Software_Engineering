@@ -48,6 +48,10 @@ function turnOn (whichDiv, choice = null) {
     }                
     
     if (whichDiv == 'wheel') {
+
+        /* reset the timer on the buzzer screen */
+        document.getElementById("time").innerHTML = 5;
+
         /* set the number of quesitons left in the top */
         document.getElementById('id-remaining-questions').innerHTML = "Questions Left : " + questionsLeft;
         
@@ -83,6 +87,8 @@ function turnOn (whichDiv, choice = null) {
         startTimer(5, display);
         startBuzzer();
     } else if (whichDiv == 'gameresult') {
+
+        document.getElementById('result_result').innerHTML = message;
         
         /* question left says 0 */
         document.getElementById('id-remaining-questions').innerHTML = 'Questions Left: 0';
