@@ -88,7 +88,6 @@ function turnOn (whichDiv, choice = null) {
         startBuzzer();
     } else if (whichDiv == 'gameresult') {
 
-        document.getElementById('result_result').innerHTML = message;
         
         /* question left says 0 */
         document.getElementById('id-remaining-questions').innerHTML = 'Questions Left: 0';
@@ -111,6 +110,8 @@ function turnOn (whichDiv, choice = null) {
         console.log('indexLargest: ' + indexLargest);
         document.getElementById('winnermessage').innerHTML = playerArray[indexLargest] + " won the game with " + scoreArray[indexLargest] + ' points.' ;
     } else if (whichDiv == 'result') {
+        //document.getElementById('result_result').innerHTML = message;
+
         let arr2 = userList;
         let playerArray2 = new Array(3);
         let scoreArray2 = new Array(3);
