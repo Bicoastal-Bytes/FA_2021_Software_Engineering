@@ -84,9 +84,6 @@ chatSocket.onmessage = function(e) {
         case 'ANSWER':
             console.log('Got an answer')
             document.getElementById('result_result').innerHTML = data.message;
-            if (activePlayer !== userName){
-                turnOn('result');
-            }
             fetch('/api/remaining')
             .then(function (response) {
                 return response.json();
@@ -94,6 +91,9 @@ chatSocket.onmessage = function(e) {
             .then(function(data) {
                 questionsLeft = data.remaining_questions;
                 getPlayerData(data);
+                if (activePlayer !== userName){
+                    turnOn('result');
+                }
             })
             .catch(function(err){
                 console.log(`Error: ${err}`);
