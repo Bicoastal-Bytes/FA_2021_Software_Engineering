@@ -5,7 +5,6 @@ let buzzerTimeout = null;
 var splits = null;      // this variable splits up the question answer
 var splitschoice = 0;   
 
-
 /* ************************ */
 /* this is for debugging    */
 /* ************************ */
@@ -37,11 +36,13 @@ function turnOn (whichDiv, choice = null) {
         .then(resp => resp.json())
         .then(function(data){
             var correctMessage = (data.answer == true) ? 'correctly' :'incorrectly';
-            var whoMessage = (activePlayer = userName) ? 'You' : activePlayer;
+            var whoMessage = (activePlayer === userName) ? 'You' : activePlayer;
             let message = `${whoMessage} answered the question ${correctMessage}.`;
+            document.getElementById('result_activediv').innerHTML = message;
+            result = `answered the question ${correctMessage}`
             chatSocket.send(JSON.stringify({
                 'event': 'ANSWER',
-                'message': message,
+                'message': result,
                 'userChoice': splits[choice]
             }));
         })
@@ -91,43 +92,51 @@ function turnOn (whichDiv, choice = null) {
         
         /* question left says 0 */
         document.getElementById('id-remaining-questions').innerHTML = 'Questions Left: 0';
+        fetch('/api/table')
+        .then(resp => resp.json())
+        .then(function(data) {
+            let arr2 = JSON.parse(data);
+            let playerArray = new Array(3);
+            let scoreArray = new Array(3);
 
-        let arr2 = userList;
-        let playerArray = new Array(3);
-        let scoreArray = new Array(3);
+            // keys are player, active and score
+            for (var i = 0; i < arr2.length; i++){
+                var obj = arr2[i];
+                scoreArray[i] = obj['score'];
+                playerArray[i] = obj['player'];
+            } 
 
-        // keys are player, active and score
-        for (var i = 0; i < arr2.length; i++){
-            var obj = arr2[i];
-            scoreArray[i] = obj['score'];
-            playerArray[i] = obj['player'];
-          } 
+            const max = Math.max.apply(Math, scoreArray.map((i) => i));
+            const indexLargest = scoreArray.indexOf(max);
 
-        const max = Math.max.apply(Math, scoreArray.map((i) => i));
-        const indexLargest = scoreArray.indexOf(max);
-
-        //indexLargest = scoreArray.indexOf(Math.max.apply(null, scoreArray));
-        console.log('indexLargest: ' + indexLargest);
-        document.getElementById('winnermessage').innerHTML = playerArray[indexLargest] + " won the game with " + scoreArray[indexLargest] + ' points.' ;
+            //indexLargest = scoreArray.indexOf(Math.max.apply(null, scoreArray));
+            console.log('indexLargest: ' + indexLargest);
+            document.getElementById('winnermessage').innerHTML = playerArray[indexLargest] + " won the game with " + scoreArray[indexLargest] + ' points.' ;
+        });
     } else if (whichDiv == 'result') {
         //document.getElementById('result_result').innerHTML = message;
+        fetch('/api/table')
+        .then(resp => resp.json())
+        .then(function(data) {
+            console.log(data);
+            let arr2 = JSON.parse(data);
+            let playerArray2 = new Array(3);
+            let scoreArray2 = new Array(3);
 
-        let arr2 = userList;
-        let playerArray2 = new Array(3);
-        let scoreArray2 = new Array(3);
-
-        // keys are player, active and score
-        for (var i = 0; i < arr2.length; i++){
-            var obj = arr2[i];
-            scoreArray2[i] = obj['score'];
-            playerArray2[i] = obj['player'];
-          }
-          document.getElementById('player1score').innerHTML = scoreArray2[0];   document.getElementById('player2score').innerHTML = scoreArray2[1]; document.getElementById('player3score').innerHTML = scoreArray2[2];
-          document.getElementById('player1').innerHTML = playerArray2[0];       document.getElementById('player2').innerHTML = playerArray2[1];     document.getElementById('player3').innerHTML = playerArray2[2];
+            // keys are player, active and score
+            for (var i = 0; i < arr2.length; i++){
+                var obj = arr2[i];
+                console.log(obj);
+                scoreArray2[i] = obj['score'];
+                playerArray2[i] = obj['player'];
+            }
+            document.getElementById('player1score').innerHTML = scoreArray2[0];   document.getElementById('player2score').innerHTML = scoreArray2[1]; document.getElementById('player3score').innerHTML = scoreArray2[2];
+            document.getElementById('player1').innerHTML = playerArray2[0];       document.getElementById('player2').innerHTML = playerArray2[1];     document.getElementById('player3').innerHTML = playerArray2[2];
+        });
 
     }
     
-    if (userName == activePlayer) {
+    if (userName === activePlayer) {
         document.getElementById(whichDiv + '_activediv').style.display = 'block';
         document.getElementById(whichDiv + '_inactivediv').style.display = 'none';
     } 
@@ -212,12 +221,12 @@ function sendPoints (pointValue) {
         choicesID = data.choices_id;
         let t_correctAnswer = data.correct_answer;
         console.log(`Question ID Recieved: ${data.question_id}`);
-    chatSocket.send(JSON.stringify({
-        'event': "CHOOSE",
-        'question': t_question,
-        'question_id': questionID,
-        'choices': t_choices,
-        'correct_answer': t_correctAnswer
+        chatSocket.send(JSON.stringify({
+            'event': "CHOOSE",
+            'question': t_question,
+            'question_id': questionID,
+            'choices': t_choices,
+            'correct_answer': t_correctAnswer
         }));
     });
 }

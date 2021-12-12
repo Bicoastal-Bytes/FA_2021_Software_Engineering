@@ -128,12 +128,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 }
             )
         
-        if event == 'START':
+        if event == 'START' or event == 'END':
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
                     'type':'chat_message',
-                    'event': 'START'
+                    'event': 'START' if event == 'START' else 'END'
                 }
             )
         # if event == 'UPDATE_TABLE':

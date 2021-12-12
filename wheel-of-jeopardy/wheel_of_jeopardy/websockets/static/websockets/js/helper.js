@@ -38,7 +38,7 @@ function getPlayerData(data){
     .then(function(resp_data) {
         let table_data = JSON.parse(resp_data);
         userList = table_data;
-        console.log(`Recieved Data Joining:${resp_data}`);
+        console.log(`Recieved Data Joining:${table_data}`);
         chat_log.value += (data.message + '\n');
         console.log(table_data)
         deleteTableData(table);

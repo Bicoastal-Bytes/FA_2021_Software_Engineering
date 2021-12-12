@@ -82,8 +82,8 @@ chatSocket.onmessage = function(e) {
             break;
         
         case 'ANSWER':
-            console.log('Got an answer')
-            document.getElementById('result_result').innerHTML = data.message;
+            console.log('Got an answer');
+            document.getElementById('result_inactivediv').innerHTML = data.message;
             fetch('/api/remaining')
             .then(function (response) {
                 return response.json();
@@ -92,6 +92,7 @@ chatSocket.onmessage = function(e) {
                 questionsLeft = data.remaining_questions;
                 getPlayerData(data);
                 if (activePlayer !== userName){
+                    
                     turnOn('result');
                 }
             })
@@ -102,11 +103,16 @@ chatSocket.onmessage = function(e) {
             
         case 'BUZZ':
             activePlayer = data.player;
+            clearTimeout(buzzerTimeout);
             turnOn('answer');
             break;
         
         case 'START':
             turnOn('wheel');
+            break;
+        
+        case 'END':
+            turnOn('gameresult');
             break;
     }
 };
@@ -153,6 +159,12 @@ document.querySelector('#next-button').onclick = function(e) {
     chatSocket.send(JSON.stringify({
         'event': 'START'
     }));
+}
+
+document.querySelector('#end-button').onclick = function(e) {
+    chatSocket.send(JSON.stringify({
+        'event': 'END'
+    }))
 }
 
 document.querySelector('#chat-message-submit').onclick = function(e) {
